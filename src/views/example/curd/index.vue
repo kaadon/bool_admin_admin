@@ -392,7 +392,7 @@ export default {
                 create_time: { value: [], op: 'range' },
                 update_time: { value: [], op: 'range' },
                 category: {
-                    name: { value: undefined, op: '=' },
+                    name: { value: undefined, op: 'like' },
                 },
             },
             week: [
