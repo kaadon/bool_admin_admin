@@ -16,6 +16,13 @@ export function listMenu (params) {
     })
 }
 
+export function listAdminMenu (params) {
+    return request({
+        url: Vue.prototype.$api.menu.adminIndex,
+        method: 'get',
+        params
+    })
+}
 // 查询菜单详细id string 菜单id
 export function getMenu (data) {
     return request({

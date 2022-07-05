@@ -111,7 +111,7 @@
 
 <script>
 import { listRoleGroup, getRoleGroup, delRoleGroup, addRoleGroup, updateRoleGroup, roleDataScopeAuthData, roleDataScopeAuth, roleStatus } from '@/api/system/role'
-import { listMenu } from '@/api/system/menu'
+import { listAdminMenu } from '@/api/system/menu'
 
 export default {
     name: 'Role',
@@ -190,7 +190,7 @@ export default {
 
         // 查询菜单树结构
         getMenuTreeselect() {
-            listMenu().then(response => {
+            listAdminMenu().then(response => {
                 this.menuOptions = this.handleTree(response.data, 'id')
                 this.originMenuOptions = response.data
             })

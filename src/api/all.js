@@ -12,6 +12,7 @@
 
 export const api = {
     menu: {
+        adminIndex: '/admin/system.menu/adminIndex',
         index: '/admin/system.menu/index',
         add: '/admin/system.menu/add',
         find: '/admin/system.menu/find',

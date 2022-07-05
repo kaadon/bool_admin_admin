@@ -28,9 +28,9 @@
                     <span v-if="!loading">登 录</span>
                     <span v-else>登 录 中...</span>
                 </el-button>
-                <div style="float: right" v-if="siteConfig.site_isreg == '1'">
+                <!-- <div style="float: right" v-if="siteConfig.site_isreg == '1'">
                     <router-link class="link-type" :to="'/register'">立即注册</router-link>
-                </div>
+                </div> -->
             </el-form-item>
         </el-form>
         <!--  底部  -->
