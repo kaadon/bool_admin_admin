@@ -60,7 +60,7 @@ export default {
     },
     data() {
         return {
-            uploadUrl: process.env.VUE_APP_BASE_API + '/ajax/upload', // 上传的图片服务器地址
+            uploadUrl: process.env.VUE_APP_BASE_API + '/admin/ajax/upload', // 上传的图片服务器地址
             headers: {
                 token: getToken(),
             },
