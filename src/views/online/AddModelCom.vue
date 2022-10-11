@@ -36,7 +36,7 @@
                             <el-form-item :prop="'subSimple.' + scope.$index + '.foreign_key'">
                                 <el-select v-model="scope.row.foreign_key" placeholder="请选择" size="small" @blur="addFormChange">
                                     <el-option
-                                        v-for="item in scope.row.relation_type === 'belong_to' ? foreignKeyOptions : primaryKeyOptions[scope.row.table_name]"
+                                        v-for="item in scope.row.relation_type === 'belongsTo' ? foreignKeyOptions : primaryKeyOptions[scope.row.table_name]"
                                         :key="item.value"
                                         :label="item.label"
                                         :value="item.value"
@@ -51,7 +51,7 @@
                             <el-form-item :prop="'subSimple.' + scope.$index + '.primary_key'">
                                 <el-select v-model="scope.row.primary_key" placeholder="请选择" size="small" @blur="addFormChange">
                                     <el-option
-                                        v-for="item in scope.row.relation_type !== 'belong_to' ? foreignKeyOptions : primaryKeyOptions[scope.row.table_name]"
+                                        v-for="item in scope.row.relation_type !== 'belongsTo' ? foreignKeyOptions : primaryKeyOptions[scope.row.table_name]"
                                         :key="item.value"
                                         :label="item.label"
                                         :value="item.value"
@@ -128,7 +128,7 @@
                             <el-form-item :prop="'moreSimple.' + scope.$index + '.foreign_key'">
                                 <el-select v-model="scope.row.foreign_key" placeholder="请选择" size="small" @blur="addFormChange">
                                     <el-option
-                                        v-for="item in scope.row.relation_type === 'belong_to' ? foreignKeyOptions : primaryKeyOptions[scope.row.table_name]"
+                                        v-for="item in  primaryKeyOptions[scope.row.table_name]"
                                         :key="item.value"
                                         :label="item.label"
                                         :value="item.value"
@@ -143,7 +143,7 @@
                             <el-form-item :prop="'moreSimple.' + scope.$index + '.primary_key'">
                                 <el-select v-model="scope.row.primary_key" placeholder="请选择" size="small" @blur="addFormChange">
                                     <el-option
-                                        v-for="item in scope.row.relation_type !== 'belong_to' ? foreignKeyOptions : primaryKeyOptions[scope.row.table_name]"
+                                        v-for="item in foreignKeyOptions "
                                         :key="item.value"
                                         :label="item.label"
                                         :value="item.value"

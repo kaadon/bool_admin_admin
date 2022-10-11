@@ -218,6 +218,9 @@ export default {
         }
     },
 
+    created(){
+        this.initIndex()
+    },
     methods: {
         // 案列：当前组件格式化方法
         testFormatter(prop) {
