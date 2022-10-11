@@ -55,8 +55,8 @@ const DictStatusOptions = [
 ]
 
 const DictModelReationOptions = [
-    { label: 'has_one', value: 'has_one' },
-    { label: 'belong_to', value: 'belong_to' },
+    { label: 'hasOne', value: 'hasOne' },
+    { label: 'belongsTo', value: 'belongsTo' },
 ]
 
 //表单验证规则支持类型

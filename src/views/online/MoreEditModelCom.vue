@@ -21,7 +21,7 @@
                     <template slot-scope="scope">
                         <el-form-item :prop="'editDetail.' + scope.$index + '.form_type'">
                             <el-select v-model="scope.row.form_type" placeholder="请选择" size="small" @blur="editFormChange">
-                                <el-option v-for="item in is_subModel.result ? DictFormSubOptions : DictFormOptions" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+                                <el-option v-for="item in  DictFormOptions" :key="item.value" :label="item.label" :value="item.value"> </el-option>
                             </el-select>
                         </el-form-item>
                     </template>
@@ -32,7 +32,7 @@
                     </template>
                 </el-table-column>
                 <!-- 附表不需要编辑的字段 -->
-                <template v-if="!is_subModel.result">
+                <template >
                     <el-table-column label="列表显示" width="100" align="center">
                         <template slot-scope="scope">
                             <el-form-item :prop="'editDetail.' + scope.$index + '.index_show'">
@@ -58,7 +58,7 @@
                     </template>
                 </el-table-column>
                 <!-- 附表不需要编辑的字段 -->
-                <template v-if="!is_subModel.result">
+                <template >
                     <el-table-column label="添加显示" width="100" align="center" v-if="false">
                         <template slot-scope="scope">
                             <el-form-item :prop="'editDetail.' + scope.$index + '.add_show'">
@@ -105,7 +105,7 @@
 <script>
 import DictCom from './DictCom'
 export default {
-    name: 'EditModelCom',
+    name: 'MoreEditModelCom',
     components: { DictCom },
     props: {
         editDetail: {
@@ -117,7 +117,7 @@ export default {
         is_subModel: {
             type: Object,
             default: () => ({
-                result: false,
+                result: true,
             }),
         },
     },
@@ -155,16 +155,16 @@ export default {
     methods: {
         editFormChange() {
             const { table, result } = this.is_subModel
-           
+             console.log("------editMoreFormChange-------",this.editForm)
             if (result) {
                 // 附表
-                this.$emit('editFormChange', {
+                this.$emit('editMoreFormChange', {
                     table,
                     editDetail: this.editForm.editDetail,
                 })
             } else {
                 // 主表
-                this.$emit('editFormChange', this.editForm)
+                this.$emit('editMoreFormChange', this.editForm)
             }
         },
 

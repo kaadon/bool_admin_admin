@@ -31,9 +31,7 @@ export const curdMixin = {
             ids: []
         }
     },
-    created () {
-        this.initIndex()
-    },
+    
     methods: {
         // 全屏
         fullScreen () {

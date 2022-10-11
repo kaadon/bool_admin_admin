@@ -83,7 +83,19 @@
                         </el-col>
                     </el-row>
                     <el-row>
-                        <el-col :lg="8" :md="12" :sm="24" :xs="24">
+                          <el-col :lg="8" :md="12" :sm="24" :xs="24">
+                            <el-form-item>
+                                <span slot="label">
+                                    <el-tooltip content="仅生成后台接口，不生成前端页面" placement="top">
+                                        <i class="el-icon-question"></i>
+                                    </el-tooltip>
+                                    是否生成页面
+                                </span>
+                                <el-checkbox v-model="form.only_api">不生成前端页面</el-checkbox>
+                            </el-form-item>
+                        </el-col>
+
+                        <el-col :lg="8" :md="12" :sm="24" :xs="24" v-if="!form.only_api">
                             <el-form-item>
                                 <span slot="label">
                                     <el-tooltip content="生成菜单" placement="top">
@@ -94,7 +106,7 @@
                                 <el-checkbox v-model="form.is_menu">是否生成菜单</el-checkbox>
                             </el-form-item>
                         </el-col>
-                        <el-col :lg="8" :md="12" :sm="24" :xs="24" v-if="form.is_menu">
+                        <el-col :lg="8" :md="12" :sm="24" :xs="24" v-if="form.is_menu && !form.only_api">
                             <el-form-item label="上级菜单">
                                 <TreeSelect :treeData="menuOptions" :defaultValue="form.menu_pid" :defaultProps="normalizer" @getValue="getTreeValue" placeholder="选择上级菜单" />
                             </el-form-item>
@@ -118,11 +130,11 @@
                     </el-row>
                     <!-- 编辑模型组件 -->
                     <el-row>
-                        <EditModelCom :editDetail="mainModelDetail" :loading="loadingEdit" @editFormChange="editFormChange" />
+                        <EditModelCom :editDetail="mainModelDetail" :loading="loadingEdit" @editFormChange="editFormChange"  />
                     </el-row>
                     <!-- 追加模型组件 -->
-                    <el-row>
-                        <AddModelCom ref="addmodelcom" :mainModelDetail="mainModelDetail" :secondaryEditTableData="secondaryEditTableData" @addFormChange="addFormChange" />
+                    <el-row v-if="!form.only_api">
+                        <AddModelCom ref="addmodelcom" :mainModelDetail="mainModelDetail" :secondaryEditTableData="secondaryEditTableData" :secondaryEditMoreTableData="secondaryEditMoreTableData" @addFormChange="addFormChange" @editMoreFormChange="editMoreFormChangeOut" />
                     </el-row>
 
                     <el-row type="flex" justify="end">
@@ -207,6 +219,7 @@ export default {
                 table_comment: '',
                 is_force: false,
                 is_menu: false,
+                only_api:false,
                 menu_pid: 0,
                 table_name: '',
                 model_is_common: false,
@@ -233,6 +246,7 @@ export default {
             newMainModelDetail: [],
             oldMainModelDetail: [],
             secondaryEditTableData: [],
+            secondaryEditMoreTableData:[],
             // 菜单数据显示结构
             normalizer: {
                 label: 'title',
@@ -317,8 +331,16 @@ export default {
 
         // 监听组件编辑
         editFormChange(data) {
-            // console.log(data, ':[Log] on editFormChange')
+             console.log(data, ':[Log] on editFormChange')
             this.form.editForm = data
+            // this.form.oneToManyRelations =data;
+            // this.form.addForm.moreSimple=data;
+        },
+        editMoreFormChangeOut(data) {
+             console.log(data, ':[Log] on editMoreFormChange')
+           // this.form.editForm = data
+            this.form.oneToManyRelations =data;
+            this.form.addForm.moreSimple=data;
         },
 
         // 监听组件添加附表
@@ -398,6 +420,7 @@ export default {
             // handleEditSecond to do
             // 底部：关系表回显
             this.secondaryEditTableData = Object.values(_row.relations)
+            this.secondaryEditMoreTableData = Object.values(_row.oneToManyRelations);
             // console.log(`:[Log] 底部关系表回显_row.relations`, Object.values(_row.relations))
         },
 
@@ -433,15 +456,17 @@ export default {
 
             if (this.form.hasOwnProperty('addForm')) {
                 this.form.relations = this.form.addForm.subSimple
+                this.form.oneToManyRelations  = this.form.addForm.moreSimple
             } else {
                 this.form.relations = []
+                this.form.oneToManyRelations  =[];
             }
 
             saveTable({ form: this.form, id: this.id })
                 .then(response => {
                     this.msgSuccess('添加成功')
                     this.close()
-                    location.href = '/index'
+                    windows.location.href = '/index'
                 })
                 .finally(() => {
                     loading.close()

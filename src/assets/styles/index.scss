@@ -196,3 +196,15 @@ aside {
 .multiselect--active {
     z-index: 1000 !important;
 }
+
+
+
+// td,th的 cell 都需要设置
+//（注意：一旦全局设置了这些样式，所有的表格内容都将不换行）
+// .el-table .cell, .el-table th > .cell {
+//     display: inline-block;
+//     white-space: nowrap;
+//     width: auto;
+//     overflow: auto;
+//   }
+  
