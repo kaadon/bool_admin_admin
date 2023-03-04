@@ -62,7 +62,7 @@ service.interceptors.response.use(
             })
                 .then(() => {
                     store.dispatch('LogOut').then(() => {
-                        location.href = '/index'
+                        location.href = '/#/index'
                     })
                 })
                 .catch(() => { })
