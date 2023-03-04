@@ -217,6 +217,7 @@ export default {
             },
             form: {
                 table_comment: '',
+                primaryKey:'id',
                 is_force: false,
                 is_menu: false,
                 only_api:false,
@@ -316,6 +317,7 @@ export default {
                 this.loadingEdit = false
                 this.mainModelDetail = response.data.fieldlist
                 this.form.table_comment = response.data.table_comment
+                this.form.primaryKey = response.data.primaryKey
             })
         },
 

@@ -171,7 +171,7 @@ export default {
             this.$refs.form.validate(valid => {
                 if (!valid) return
                 this.loading = true
-                if (this.form.sms_code) {
+                if (this.formType != 1) {
                     // 注册
                     store
                         .dispatch('ApiRegister', this.form)

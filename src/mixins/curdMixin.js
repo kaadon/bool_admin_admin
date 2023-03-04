@@ -21,9 +21,10 @@ export const curdMixin = {
             pageInfo: {
                 page: 1,
                 limit: 10,
-                sort: undefined,
-                order: undefined
+                sort: 'id',
+                order: 'desc'
             },
+            primaryKey:'id',
             // 是否全屏
             isFullScreen: false,
             loading: false,
@@ -68,7 +69,7 @@ export const curdMixin = {
 
         // 编辑
         handleEdit (row) {
-            this.handleFind(row.id)
+            this.handleFind(row[this.primaryKey])
         },
 
         // 编辑回显
@@ -80,13 +81,13 @@ export const curdMixin = {
 
         // 详情
         handleDetail (row) {
-            this.handleFindDetail(row.id)
+            this.handleFindDetail(row[this.primaryKey])
             this.disabled = true
         },
 
         // 详情回显
         async handleFindDetail (id) {
-            let response = await this.request.post(this.api.find, { id })
+            let response = await this.request.get(this.api.find, {  params: { id } })
             this.findFormData = this.formatFindData(response.data)
             this.editOpen = true
         },
@@ -120,20 +121,20 @@ export const curdMixin = {
 
         //监听选中的table
         selectionChange (selection) {
-            this.ids = selection.map(item => item.id)
+            this.ids = selection.map(item => item[this.primaryKey])
             this.multiple = !selection.length
         },
 
         // 删除
         handleDelete (row) {
-            let tableIds = row.id || this.ids
+            let tableIds = row[this.primaryKey] || this.ids
             tableIds = tableIds.toString()
             this.$confirm(`是否确认删除表编号为"${tableIds}"的数据项?`, '警告', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                return this.request.post(this.api.delete, { id: tableIds })
+                return this.request.get(this.api.delete, { params: { id:tableIds } })
             }).then(() => {
                 this.initIndex()
                 this.msgSuccess('删除成功')
@@ -143,7 +144,8 @@ export const curdMixin = {
         //监听组件提交
         submitForm (formObj) {
             const filter_data = this.filterPostData(formObj, ['create_time', 'update_time'])
-            if (formObj.id != undefined) {
+            if (formObj[this.primaryKey] != undefined) {
+                filter_data.id=filter_data[this.primaryKey];
                 this.request
                     .post(this.api.edit, { ...filter_data })
                     .then(response => {
@@ -183,7 +185,7 @@ export const curdMixin = {
 
         //
         statusChange (row) {
-            this.request.post(this.api.status, { id: row.id, status: row.new_switch }).then(() => {
+            this.request.post(this.api.status, { id: row[this.primaryKey], status: row.new_switch }).then(() => {
                 this.initIndex()
             })
         },

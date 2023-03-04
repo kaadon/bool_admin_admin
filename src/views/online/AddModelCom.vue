@@ -46,6 +46,7 @@
                             </el-form-item>
                         </template>
                     </el-table-column>
+
                     <el-table-column label="关联主键" width="150" align="center">
                         <template slot-scope="scope">
                             <el-form-item :prop="'subSimple.' + scope.$index + '.primary_key'">
@@ -79,6 +80,26 @@
                             </el-form-item>
                         </template>
                     </el-table-column>
+
+
+                     <el-table-column label="请选择selectpage的label值" width="200" align="center">
+                        <template slot-scope="scope">
+                            <el-form-item :prop="'subSimple.' + scope.$index + '.selectpageLabel'">
+                                <el-select
+                                    v-model="scope.row.selectpageLabel"
+                                    placeholder="请选择"
+                                    size="small"
+                                    :collapse-tags="true"
+                                    @blur="addFormChange"
+                                >
+                                    <el-option v-for="item in primaryKeyOptions[scope.row.table_name]" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+                                </el-select>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+
+
+
                     <el-table-column label="操作" align="center">
                         <template slot-scope="scope">
                             <el-button size="mini" type="text" icon="el-icon-view" @click="detailSubShow(scope.row, scope.$index)" :disabled="scope.row.showfieldlist.length === 0">详情</el-button>
@@ -271,6 +292,7 @@ export default {
                             primary_key: arr[i].primary_key,
                             relation_type: arr[i].relation_type,
                             showfieldlist: Object.values(arr[i].showfieldlist),
+                            selectpageLabel : arr[i].selectpageLabel,
                             remark: arr[i].remark,
                             table_name: arr[i].table_name,
                         })
@@ -427,6 +449,7 @@ export default {
                 primary_key: '',
                 remark:'',
                 showfieldlist: [],
+                selectpageLabel : [],
                 })
             }else{
                 this.addForm.moreSimple.push({
