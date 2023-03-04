@@ -9,8 +9,6 @@ yarn-error.log*
 tests/**/coverage/
 tests/e2e/reports
 selenium-debug.log
-.example.env.development
-.example.env.production
 # Editor directories and files
 .idea
 .vscode
@@ -23,3 +21,5 @@ selenium-debug.log
 package-lock.json
 yarn.lock
 /web/
+/.env.development
+/.env.production
