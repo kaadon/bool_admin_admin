@@ -94,6 +94,7 @@ function filterChildren (childrenMap, lastRouter = false) {
             if (el.component === 'ParentView') {
                 el.children.forEach(c => {
                     c.path = el.path + '/' + c.path
+                    console.log(c.path)
                     if (c.children && c.children.length) {
                         children = children.concat(filterChildren(c.children, c))
                         return
