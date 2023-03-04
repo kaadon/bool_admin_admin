@@ -164,7 +164,7 @@ export default {
 
                     updateConfig({ ...this.form, ...deal_data }).then(response => {
                         this.msgSuccess('修改成功')
-                        location.href = '/index'
+                        location.href = '/#/index'
                     })
                 }
             })
