@@ -94,8 +94,8 @@ export default {
             getCodeImg().then(res => {
                 this.captchaOnOff = res.captchaOnOff === undefined ? true : res.captchaOnOff
                 if (this.captchaOnOff) {
-                    this.loginForm.key = Cookies.get('key')
-                    this.codeUrl = 'data:image/png;base64,' + btoa(new Uint8Array(res).reduce((data, byte) => data + String.fromCharCode(byte), ''))
+                    this.loginForm.key = res.data.verify_id
+                    this.codeUrl = res.data.verify_src
                 }
             })
         },

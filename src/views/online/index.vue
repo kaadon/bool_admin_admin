@@ -468,7 +468,7 @@ export default {
                 .then(response => {
                     this.msgSuccess('添加成功')
                     this.close()
-                    windows.location.href = '/#/index'
+                    windows.location.href = process.env.VUE_APP_BASE_URL + '/#/index'
                 })
                 .finally(() => {
                     loading.close()

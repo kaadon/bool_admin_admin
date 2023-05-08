@@ -1,29 +1,29 @@
 #!/bin/env bash
-ROOT_PATH=/www/webhook/dev_bool_admin/bool_admin_admin/
-WEB_PATH=/web
+ROOT_PATH=/www/webhook/crmchat/crmchat_admin
+WEB_PATH=$ROOT_PATH/web
 
 cd $ROOT_PATH
 
 git checkout master
 
-git fetch --all 
+git fetch --all
 
-git reset --hard origin/master 
+git reset --hard origin/master
 
-git pull 
+git pull
 
 git branch
 
-yarn 
+yarn
 
-yarn build:prod
+yarn build
 
-if [ ! -e $ROOT_PATH/$WEB_PATH ] ; then
-    mkdir $ROOT_PATH/$WEB_PATH
+if [ ! -e $WEB_PATH ] ; then
+    mkdir $WEB_PATH
 fi
 
-rm -rf $ROOT_PATH/$WEB_PATH/* 
+rm -rf $WEB_PATH/*
 
-cp -rf $ROOT_PATH/dist/* $ROOT_PATH/$WEB_PATH
+cp -rf $ROOT_PATH/dist/* $WEB_PATH
 
 echo "执行完毕!"

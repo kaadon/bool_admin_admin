@@ -62,6 +62,6 @@ export function getCodeImg () {
     return request({
         url: Vue.prototype.$api.login.getCaptcha,
         method: 'get',
-        responseType: 'arraybuffer'
+        // responseType: 'arraybuffer'
     })
 }

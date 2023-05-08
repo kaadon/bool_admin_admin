@@ -109,7 +109,7 @@ export default {
             })
                 .then(() => {
                     this.$store.dispatch('LogOut').then(() => {
-                        location.href = '/#/index'
+                        location.href = process.env.VUE_APP_BASE_URL + '/#/index'
                     })
                 })
                 .catch(() => {})
