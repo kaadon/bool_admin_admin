@@ -11,7 +11,7 @@ import Vue from 'vue'
 export function listMenu (params) {
     return request({
         url: Vue.prototype.$api.menu.index,
-        method: 'get',
+        method: 'post',
         params
     })
 }
@@ -19,7 +19,7 @@ export function listMenu (params) {
 export function listAdminMenu (params) {
     return request({
         url: Vue.prototype.$api.menu.adminIndex,
-        method: 'get',
+        method: 'post',
         params
     })
 }

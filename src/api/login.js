@@ -61,7 +61,7 @@ export function update (data) {
 export function getCodeImg () {
     return request({
         url: Vue.prototype.$api.login.getCaptcha,
-        method: 'get',
+        method: 'post',
         // responseType: 'arraybuffer'
     })
 }

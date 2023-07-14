@@ -14,7 +14,7 @@ import Vue from 'vue'
 export function apiFilesIndex (params) {
     return request({
         url: Vue.prototype.$api.file.index,
-        method: 'get',
+        method: 'post',
         params
     })
 }

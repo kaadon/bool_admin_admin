@@ -5,7 +5,7 @@ import Vue from 'vue'
 export function listStaff (params) {
     return request({
         url: Vue.prototype.$api.admin.index,
-        method: 'get',
+        method: 'post',
         params
     })
 }

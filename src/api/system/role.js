@@ -5,7 +5,7 @@ import Vue from 'vue'
 export function listRoleGroup (params) {
     return request({
         url: Vue.prototype.$api.role.index,
-        method: 'get',
+        method: 'post',
         params
     })
 }

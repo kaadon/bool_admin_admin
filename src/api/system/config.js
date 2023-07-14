@@ -5,7 +5,7 @@ import Vue from 'vue'
 export function listConfig (params) {
     return request({
         url: Vue.prototype.$api.config.index,
-        method: 'get',
+        method: 'post',
         params
     })
 }
@@ -23,6 +23,6 @@ export function updateConfig (data) {
 export function getConfig () {
     return request({
         url: Vue.prototype.$api.config.getConfig,
-        method: 'get',
+        method: 'post',
     })
 }

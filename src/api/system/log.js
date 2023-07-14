@@ -5,7 +5,7 @@ import Vue from 'vue'
 export function list (params) {
     return request({
         url: Vue.prototype.$api.log.index,
-        method: 'get',
+        method: 'post',
         params
     })
 }
@@ -30,7 +30,7 @@ export function cleanOperlog () {
 export function exportOperlog (query) {
     return request({
         url: '',
-        method: 'get',
+        method: 'post',
         params: query
     })
 }

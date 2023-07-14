@@ -84,7 +84,7 @@ service.interceptors.response.use(
         } else if (code === 500) {
             Message({ message: msg, type: 'error' })
             return Promise.reject(new Error(msg))
-        } else if (code !== 1) {
+        } else if (code !== 200) {
             Notification.error({ title: msg })
             return Promise.reject(new Error(msg))
         } else {
