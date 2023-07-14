@@ -181,7 +181,7 @@ export default {
             }
             listRoleGroup(qyparams)
                 .then(response => {
-                    this.roleList = response.data
+                    this.roleList = response.data.list
                 })
                 .finally(() => {
                     this.loading = false
