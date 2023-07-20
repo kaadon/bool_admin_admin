@@ -13,7 +13,7 @@ export function listConfig (params) {
 // 修改参数列表
 export function updateConfig (data) {
     return request({
-        url: Vue.prototype.$api.config.index,
+        url: Vue.prototype.$api.config.update,
         method: 'post',
         data
     })

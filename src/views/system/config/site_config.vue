@@ -161,17 +161,16 @@ export default {
                     const deal_data = {
                         site_open_time: this.form.site_open_time.toString(),
                     }
-
                     updateConfig({ ...this.form, ...deal_data }).then(response => {
                         this.msgSuccess('修改成功')
-                        location.href = process.env.VUE_APP_BASE_URL + '/#/index'
+                        this.$emit("submitGetList")
                     })
                 }
             })
         },
         close() {
             this.$store.dispatch('tagsView/delView', this.$route)
-            this.$router.push({ path: '/index' })
+            this.$emit("submitGetList")
         },
     },
 }

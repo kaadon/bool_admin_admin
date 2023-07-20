@@ -107,6 +107,7 @@ export default {
             this.$refs['form'].validate(valid => {
                 if (valid) {
                     updateConfig({ ...this.form }).then(response => {
+                        this.$emit("submitGetList")
                         this.msgSuccess('修改成功')
                     })
                 }
@@ -134,7 +135,7 @@ export default {
 
         close() {
             this.$store.dispatch('tagsView/delView', this.$route)
-            this.$router.push({ path: '/index' })
+            this.$emit("submitGetList")
         },
     },
 }

@@ -64,6 +64,7 @@ export const api = {
     },
     config: {
         index: '/admin/system.config/index',
+        update: '/admin/system.config/update',
         getConfig: 'admin/ajax/getConfig'
     },
     log: {

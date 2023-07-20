@@ -6,8 +6,8 @@
             </div>
             <el-tabs v-model="activeTab">
                 <el-tab-pane v-for="(item, index) in configList" :key="index" :label="item.tab" :name="item.value">
-                    <SiteConfig v-if="item.value === 'site'" :detail="item.detail" />
-                    <UploadConfig v-if="item.value === 'upload'" :detail="item.detail" />
+                    <SiteConfig v-if="item.value === 'site'" :detail="item.detail" :submitGetList='getList'/>
+                    <UploadConfig v-if="item.value === 'upload'" :detail="item.detail" :submitGetList='getList'/>
                 </el-tab-pane>
             </el-tabs>
         </el-card>

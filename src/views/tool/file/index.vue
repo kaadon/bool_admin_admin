@@ -136,8 +136,11 @@ export default {
             }
             apiFilesIndex(qyparams)
                 .then(response => {
-                    this.tableList = response.data
-                    this.total = response.count
+                    let listData = response.data
+                    this.tableList = listData.list
+                    this.total = listData.count
+                    this.pageInfo.page =listData.page
+                    this.pageInfo.limit =listData.limit
                 })
                 .finally(() => {
                     this.loading = false
