@@ -12,7 +12,6 @@
                         @statusChange="statusChange($event, scope.row, item.prop)"
                     >
                     </component>
-
                     <component v-else :is="item.component ? item.component : 'QuickAdminText'" :value="renderTableFormat(scope.row, item.prop)"> </component>
                 </template>
             </el-table-column>
