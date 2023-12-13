@@ -199,7 +199,7 @@ export function formatQueryParams (data) {
             if (!data[key].hasOwnProperty('value')) {
                 filter(data[key], key)
             } else {
-                if (data[key]['value'] == undefined || data[key]['value'] == null) continue
+                if (data[key]['value'] == undefined || data[key]['value'] == null || data[key]['value'].toString().trim().length === 0) continue
                 if (JSON.stringify(data[key]['value']) === '[]') continue
 
                 if (ckey) {
