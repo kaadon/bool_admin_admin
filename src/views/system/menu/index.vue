@@ -17,12 +17,15 @@
 
         <el-row :gutter="10" class="mb8">
             <el-col :span="1.5">
-                <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd" v-hasPermi="$api.menu.add">新增</el-button>
+                <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd"
+                           v-hasPermi="$api.menu.add">新增
+                </el-button>
             </el-col>
             <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
         </el-row>
 
-        <el-table v-loading="loading" :data="menuList" row-key="id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
+        <el-table v-loading="loading" :data="menuList" row-key="id"
+                  :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
             <el-table-column prop="title" label="菜单名称" :show-overflow-tooltip="true" width="160"></el-table-column>
             <el-table-column prop="icon" label="图标" align="center" width="100">
                 <template slot-scope="scope">
@@ -33,7 +36,8 @@
             <el-table-column prop="component" label="组件路径" :show-overflow-tooltip="true"></el-table-column>
             <el-table-column label="状态" align="center" key="status">
                 <template slot-scope="scope">
-                    <el-switch v-model="scope.row.status" :active-value="1" :inactive-value="0" @change="handleStatusChange(scope.row)"></el-switch>
+                    <el-switch v-model="scope.row.status" :active-value="1" :inactive-value="0"
+                               @change="handleStatusChange(scope.row)"></el-switch>
                 </template>
             </el-table-column>
             <el-table-column label="创建时间" align="center" prop="create_time">
@@ -43,9 +47,15 @@
             </el-table-column>
             <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                 <template slot-scope="scope">
-                    <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="$api.menu.edit">修改</el-button>
-                    <el-button size="mini" type="text" icon="el-icon-plus" @click="handleAdd(scope.row)" v-hasPermi="$api.menu.add">新增</el-button>
-                    <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="$api.menu.delete">删除</el-button>
+                    <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
+                               v-hasPermi="$api.menu.edit">修改
+                    </el-button>
+                    <el-button size="mini" type="text" icon="el-icon-plus" @click="handleAdd(scope.row)"
+                               v-hasPermi="$api.menu.add">新增
+                    </el-button>
+                    <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
+                               v-hasPermi="$api.menu.delete">删除
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -67,17 +77,20 @@
                 <el-row>
                     <el-col :span="24">
                         <el-form-item label="上级菜单">
-                            <TreeSelect :treeData="menuOptions" :defaultValue="form.pid" :defaultProps="normalizer" @getValue="getTreeValue" placeholder="选择上级菜单" />
+                            <TreeSelect :treeData="menuOptions" :defaultValue="form.pid" :defaultProps="normalizer"
+                                        @getValue="getTreeValue" placeholder="选择上级菜单" />
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="24">
                         <el-form-item v-if="form.type != 3" label="菜单图标">
-                            <el-popover placement="bottom-start" width="460" trigger="click" @show="$refs['iconSelect'].reset()">
+                            <el-popover placement="bottom-start" width="460" trigger="click"
+                                        @show="$refs['iconSelect'].reset()">
                                 <IconSelect ref="iconSelect" @selected="selected" />
                                 <el-input slot="reference" v-model="form.icon" placeholder="点击选择图标" readonly>
-                                    <svg-icon v-if="form.icon" slot="prefix" :icon-class="form.icon" class="el-input__icon" style="height: 32px; width: 16px" />
+                                    <svg-icon v-if="form.icon" slot="prefix" :icon-class="form.icon"
+                                              class="el-input__icon" style="height: 32px; width: 16px" />
                                     <i v-else slot="prefix" class="el-icon-search el-input__icon" />
                                 </el-input>
                             </el-popover>
@@ -98,7 +111,8 @@
                     <el-col :span="12">
                         <el-form-item v-if="form.type != 3" prop="path">
                             <span slot="label">
-                                <el-tooltip content="访问的路由地址，如：`system`，如外网地址则以`http(s)://`开头" placement="top">
+                                <el-tooltip content="访问的路由地址，如：`system`，如外网地址则以`http(s)://`开头"
+                                            placement="top">
                                     <i class="el-icon-question"></i>
                                 </el-tooltip>
                                 路由地址
@@ -109,7 +123,8 @@
                     <el-col :span="12" v-if="form.type == 2">
                         <el-form-item prop="component">
                             <span slot="label">
-                                <el-tooltip content="访问的组件路径，如：`system/meun/index`，默认在`src/views`目录下" placement="top">
+                                <el-tooltip content="访问的组件路径，如：`system/meun/index`，默认在`src/views`目录下"
+                                            placement="top">
                                     <i class="el-icon-question"></i>
                                 </el-tooltip>
                                 组件路径
@@ -120,7 +135,8 @@
                     <el-col :span="12" v-if="form.type == 3">
                         <el-form-item prop="permission">
                             <span slot="label">
-                                <el-tooltip content="按钮操作权限，填写接口地址，如/admin/system.menu/delete" placement="top">
+                                <el-tooltip content="按钮操作权限，填写接口地址，如/admin/system.menu/delete"
+                                            placement="top">
                                     <i class="el-icon-question"></i>
                                 </el-tooltip>
                                 权限地址
@@ -137,7 +153,9 @@
                                 显示状态
                             </span>
                             <el-radio-group v-model="form.status">
-                                <el-radio v-for="dict in statusMenuOptions" :key="dict.value" :label="dict.value">{{ dict.label }}</el-radio>
+                                <el-radio v-for="dict in statusMenuOptions" :key="dict.value" :label="dict.value">
+                                    {{ dict.label }}
+                                </el-radio>
                             </el-radio-group>
                         </el-form-item>
                     </el-col>
@@ -153,7 +171,8 @@
                                 标签颜色
                             </span>
                             <el-select v-model="form.tag_type" placeholder="请选择" clearable>
-                                <el-option v-for="item in tagType" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+                                <el-option v-for="item in tagType" :key="item.value" :label="item.label"
+                                           :value="item.value"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -167,6 +186,26 @@
                                 标签值
                             </span>
                             <el-input v-model="form.tag_value" placeholder="请输入标签值" />
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row v-if="form.type === 2">
+                    <el-col :span="12">
+                        <el-form-item label="添加菜单:" prop="routeFormSwitch">
+                            <el-switch v-model="routeFormSwitch" active-color="#13ce66" :active-value="1"
+                                       :inactive-value="0" active-text="添加" inactive-text="不添加"></el-switch>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item prop="routes" v-if="routeFormSwitch">
+                            <span slot="label">
+                                <el-tooltip content="按钮操作权限，填写接口class，如/admin/system.menu"
+                                            placement="top">
+                                    <i class="el-icon-question"></i>
+                                </el-tooltip>
+                                权限类
+                            </span>
+                            <el-input v-model="form.routes" placeholder="请输入权限类" />
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -188,6 +227,7 @@ export default {
     components: { IconSelect },
     data() {
         return {
+            routeFormSwitch: 0,
             // 遮罩层
             loading: true,
             // 显示搜索条件
@@ -240,6 +280,7 @@ export default {
     },
     created() {
         this.getList()
+
     },
     methods: {
         // tree select data
@@ -358,7 +399,7 @@ export default {
         },
 
         // 提交按钮
-        submitForm: function () {
+        submitForm: function() {
             this.$refs['form'].validate(valid => {
                 if (valid) {
                     if (this.form.id != undefined) {
@@ -394,7 +435,8 @@ export default {
                     this.getList()
                     this.msgSuccess('删除成功')
                 })
-                .catch(() => {})
+                .catch(() => {
+                })
         },
     },
 }
