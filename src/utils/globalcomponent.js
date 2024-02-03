@@ -11,32 +11,40 @@
 // +----------------------------------------------------------------------
 
 // 自定义表格工具组件
-import RightToolbar from "@/components/RightToolbar"
+import RightToolbar from '@/components/RightToolbar'
 // 富文本组件
-import Editor from "@/components/Editor"
+import Editor       from '@/components/Editor'
 // 文件上传组件
-import FileUpload from "@/components/FileUpload"
+import FileUpload   from '@/components/FileUpload'
 // 图片上传组件
-import ImageUpload from "@/components/ImageUpload"
+import ImageUpload  from '@/components/ImageUpload'
 // 分页组件
-import Pagination from "@/components/Pagination"
+import Pagination   from '@/components/Pagination'
 
 //curd表单组件
-import QuickAdminText from '@/components/QuickAdminTable/text'
-import QuickAdminTag from '@/components/QuickAdminTable/tag'
-import QuickAdminImage from '@/components/QuickAdminTable/image'
-import QuickAdminSwitch from '@/components/QuickAdminTable/switch'
-import QuickAdminPopover from '@/components/QuickAdminTable/popover'
-import QuickAdminTextColor from '@/components/QuickAdminTable/textcolor'
+import QuickAdminText        from '@/components/QuickAdminTable/text'
+import QuickAdminTag         from '@/components/QuickAdminTable/tag'
+import QuickAdminImage       from '@/components/QuickAdminTable/image'
+import QuickAdminSwitch      from '@/components/QuickAdminTable/switch'
+import QuickAdminPopover     from '@/components/QuickAdminTable/popover'
+import QuickAdminTextColor   from '@/components/QuickAdminTable/textcolor'
+import QuickAdminHtmlPopover from '@/components/QuickAdminTable/htmlPopover'
 
 //自定义选择框分页组件
 import SelectPage from '@/components/QuickAdminCom/selectPage'
+
 export {
     RightToolbar,
     Editor,
     FileUpload,
     ImageUpload,
     Pagination,
-    QuickAdminText, QuickAdminTag, QuickAdminImage, QuickAdminSwitch, QuickAdminPopover, QuickAdminTextColor,
-    SelectPage
+    QuickAdminText,
+    QuickAdminTag,
+    QuickAdminImage,
+    QuickAdminSwitch,
+    QuickAdminPopover,
+    QuickAdminTextColor,
+    QuickAdminHtmlPopover,
+    SelectPage,
 }

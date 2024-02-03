@@ -1,8 +1,8 @@
 {
-    "name": "quickadmin",
+    "name": "KaadonAdmin",
     "version": "0.2.3",
-    "description": "QuickAdmin管理系统",
-    "author": "QuickAdmin",
+    "description": "KaadonAdmin管理系统",
+    "author": "KaadonAdmin",
     "license": "MIT",
     "scripts": {
         "dev": "vue-cli-service serve",
@@ -33,12 +33,12 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://gitee.com/y_project/quickadmin-Vue.git"
+        "url": "https://github.com/kaadon/bool_admin_admin.git"
     },
     "dependencies": {
         "@antv/g2": "^4.1.35",
         "accounting": "^0.4.1",
-        "axios": "0.21.0",
+        "axios": "1.6.7",
         "clipboard": "2.0.6",
         "core-js": "^3.23.1",
         "element-china-area-data": "^5.0.2",
@@ -71,7 +71,7 @@
         "babel-eslint": "10.1.0",
         "chalk": "4.1.0",
         "connect": "3.6.6",
-        "eslint": "7.15.0",
+        "eslint": "6.8.0",
         "eslint-plugin-vue": "7.2.0",
         "lint-staged": "10.5.3",
         "runjs": "4.4.2",
