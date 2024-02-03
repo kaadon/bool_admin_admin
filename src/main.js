@@ -14,7 +14,7 @@ import directive from './directive'
 import '@/assets/icons' // icon
 import '@/permission' // permission control
 import Init from '@/common/init' //初始常量
-import { api } from '@/api/all'
+import * as api from '@/api'
 import request from '@/utils/request'
 import * as globalMethod from '@/utils/quickadmin'
 import * as filters from '@/utils/filters'

@@ -149,13 +149,13 @@
             <!-- 案例操作 -->
             <el-row :gutter="10" class="mb8">
                 <el-col :span="1.5">
-                    <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="open" v-hasPermi="api.add">添加</el-button>
+                    <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="open" v-hasPermi="$api.add">添加</el-button>
                 </el-col>
                 <el-col :span="1.5">
-                    <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete" v-hasPermi="api.delete">删除</el-button>
+                    <el-button type="danger" plain icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete" v-hasPermi="$api.delete">删除</el-button>
                 </el-col>
                 <el-col :span="1.5">
-                    <el-button type="warning" plain icon="el-icon-download" size="mini" v-loading="exportLoading" @click="handleExport" v-hasPermi="api.export">导出</el-button>
+                    <el-button type="warning" plain icon="el-icon-download" size="mini" v-loading="exportLoading" @click="handleExport" v-hasPermi="$api.export">导出</el-button>
                 </el-col>
                 <right-toolbar :showSearch.sync="showSearch" @queryTable="initIndex" :columns="columns" printId="#quickadmin"></right-toolbar>
             </el-row>
@@ -174,9 +174,9 @@
                 <template v-slot:action>
                     <el-table-column label="操作" width="180">
                         <template slot-scope="scope">
-                            <el-button size="mini" type="text" icon="el-icon-edit" @click="handleEdit(scope.row)" v-hasPermi="api.edit">编辑</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-tickets" @click="handleDetail(scope.row)" v-hasPermi="api.find">详情</el-button>
-                            <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="api.delete">删除</el-button>
+                            <el-button size="mini" type="text" icon="el-icon-edit" @click="handleEdit(scope.row)" v-hasPermi="$api.edit">编辑</el-button>
+                            <el-button size="mini" type="text" icon="el-icon-tickets" @click="handleDetail(scope.row)" v-hasPermi="$api.find">详情</el-button>
+                            <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="$api.delete">删除</el-button>
                         </template>
                     </el-table-column>
                 </template>
