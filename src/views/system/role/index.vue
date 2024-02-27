@@ -290,13 +290,13 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection.map(item => item.id)
-            this.single = selection.length != 1
+            this.single = selection.length !== 1
             this.multiple = !selection.length
         },
 
         // 树权限（展开/折叠）
         handleCheckedTreeExpand(value, type) {
-            if (type == 'menu') {
+            if (type === 'menu') {
                 const treeList = this.menuOptions
                 for (let i = 0; i < treeList.length; i++) {
                     this.$refs.menu.store.nodesMap[treeList[i].id].expanded = value
@@ -306,7 +306,7 @@ export default {
 
         // 树权限（全选/全不选）
         handleCheckedTreeNodeAll(value, type) {
-            if (type == 'menu') {
+            if (type === 'menu') {
                 this.$refs.menu.setCheckedNodes(value ? this.originMenuOptions : [])
             }
         },
@@ -349,7 +349,7 @@ export default {
         submitRoleForm() {
             this.$refs['form'].validate(valid => {
                 if (valid) {
-                    if (this.form.id != undefined) {
+                    if (this.form.id !== undefined) {
                         // 更新时过滤数据，只传后台需要的字段
                         const filter_data = this.filterPostData(this.form)
                         updateRoleGroup(filter_data).then(response => {
@@ -370,7 +370,7 @@ export default {
 
         // 提交按钮（角色菜单权限）
         submitDataScope() {
-            if (this.form.id != undefined) {
+            if (this.form.id !== undefined) {
                 // 获取勾选的菜单
                 this.form.menu_ids = this.getMenuAllCheckedKeys()
 

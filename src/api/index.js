@@ -1,4 +1,6 @@
-export * as demo from './apiModules/demo'
+export * as member from './apiModules/member'
+export * as merchant from './apiModules/merchant'
+export * as example from './apiModules/example'
 export const menu = {
     adminIndex: '/admin/system.menu/adminIndex',
     index: '/admin/system.menu/index',

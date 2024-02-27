@@ -20,7 +20,6 @@ import FileUpload   from '@/components/FileUpload'
 import ImageUpload  from '@/components/ImageUpload'
 // 分页组件
 import Pagination   from '@/components/Pagination'
-
 //curd表单组件
 import QuickAdminText        from '@/components/QuickAdminTable/text'
 import QuickAdminTag         from '@/components/QuickAdminTable/tag'

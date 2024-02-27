@@ -32,7 +32,7 @@ export const curdMixin = {
             ids: []
         }
     },
-    
+
     methods: {
         // 全屏
         fullScreen () {
@@ -60,8 +60,8 @@ export const curdMixin = {
             }
 
             this.request.get(this.api.index, { params: qyparams }).then(response => {
-                this.tableData = response.data
-                this.total = response.count
+                this.tableData = response.data.list
+                this.total = response.data.count
             }).finally(() => {
                 this.loading = false
             })
@@ -144,7 +144,7 @@ export const curdMixin = {
         //监听组件提交
         submitForm (formObj) {
             const filter_data = this.filterPostData(formObj, ['create_time', 'update_time'])
-            if (formObj[this.primaryKey] != undefined) {
+            if (formObj[this.primaryKey] !== undefined) {
                 filter_data.id=filter_data[this.primaryKey];
                 this.request
                     .post(this.api.edit, { ...filter_data })
@@ -185,7 +185,7 @@ export const curdMixin = {
 
         //
         statusChange (row) {
-            this.request.post(this.api.status, { id: row[this.primaryKey], status: row.new_switch }).then(() => {
+            this.request.post(this.api.status, { id: row[this.primaryKey], [row.switch_target]: row.new_switch }).then(() => {
                 this.initIndex()
             })
         },

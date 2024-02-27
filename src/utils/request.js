@@ -22,7 +22,7 @@ service.interceptors.request.use(
         if (getToken() && !isToken) {
             config.headers['token'] = getToken()
         }
-
+        if (!config?.url) throw new Error('接口地址不能为空')
         // Warning:插件市场官方用户token,禁止修改
         if (config.url.includes('/qaapi/')) {
             config.headers['apitoken'] = Cookies.get('Api-Token')

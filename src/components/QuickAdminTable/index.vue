@@ -1,43 +1,46 @@
 <template>
     <div>
-        <el-table v-loading="loading" :data="source" style="width: 100%" @selection-change="handleSelectionChange" @sort-change="handleSortChange">
-            <el-table-column v-if="selection" type="selection" width="55"> </el-table-column>
+        <el-table v-loading='loading' :data='source' style='width: 100%' @selection-change='handleSelectionChange'
+                  @sort-change='handleSortChange'>
+            <el-table-column v-if='selection' type='selection' width='55'></el-table-column>
 
-            <el-table-column v-for="(item, index) in visibleColoums" :key="index" :label="item.label" :prop="item.prop" :sortable="item.sortable" :width="item.width" align="center">
-                <template slot-scope="scope">
+            <el-table-column v-for='(item, index) in visibleColoums' :key='index' :label='item.label' :prop='item.prop'
+                             :sortable='item.sortable' :width='item.width' align='center'>
+                <template slot-scope='scope'>
                     <component
                         v-if="item.prop.indexOf('.') === -1"
                         :is="item.component ? item.component : 'QuickAdminText'"
-                        :value="item.formatter ? item.formatter(scope.row[item.prop], scope.row) : scope.row[item.prop]"
-                        @statusChange="statusChange($event, scope.row, item.prop)"
+                        :value='item.formatter ? item.formatter(scope.row[item.prop], scope.row) : scope.row[item.prop]'
+                        @statusChange='statusChange($event, scope.row, item.prop)'
                     >
                     </component>
-                    <component v-else :is="item.component ? item.component : 'QuickAdminText'" :value="renderTableFormat(scope.row, item.prop)"> </component>
+                    <component v-else :is="item.component ? item.component : 'QuickAdminText'"
+                               :value='renderTableFormat(scope.row, item.prop)'></component>
                 </template>
             </el-table-column>
             <!-- 如果有table操作，可从父组件插槽进来 -->
-            <slot name="action"></slot>
+            <slot name='action'></slot>
         </el-table>
     </div>
 </template>
 <script>
 export default {
-    name: 'QAtable',
+    name : 'QAtable',
     props: {
-        source: {
+        source   : {
             required: true,
-            type: Array,
+            type    : Array,
         },
-        columns: {
+        columns  : {
             required: true,
-            type: Array,
+            type    : Array,
         },
         selection: {
-            type: Boolean,
+            type   : Boolean,
             default: false,
         },
-        loading: {
-            type: Boolean,
+        loading  : {
+            type   : Boolean,
             default: false,
         },
     },
@@ -49,20 +52,24 @@ export default {
             })
         },
     },
-    methods: {
+    methods : {
         handleSelectionChange(val) {
             this.$emit('selectionChange', val)
         },
 
         handleSortChange(val) {
             this.$emit('sortChange', {
-                sort: val.prop,
+                sort : val.prop,
                 order: val.order === 'ascending' ? 'asc' : 'desc',
             })
         },
 
-        statusChange(value, row,key) {
-            this.$emit('statusChange', { ...row, new_switch: value ,switch_target:key})
+        statusChange(value, row, key) {
+            return this.$emit('statusChange', {
+                ...row,
+                new_switch   : value,
+                switch_target: key,
+            })
         },
     },
 }

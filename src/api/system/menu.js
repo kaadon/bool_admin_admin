@@ -5,8 +5,8 @@ import Vue from 'vue'
  *查询菜单列表
  * 1：目录 2：菜单 3：按钮权限 4：目录+菜单 不传取所有
  * @export
- * @param {*} data menu_type
  * @returns
+ * @param params
  */
 export function listMenu (params) {
     return request({
