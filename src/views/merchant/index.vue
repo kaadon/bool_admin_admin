@@ -97,8 +97,8 @@
 </template>
 <script>
 import { curdMixin }                            from '@/mixins/curdMixin'
-import EditAccountForm                          from '@/views/member/EditAccountForm.vue'
-import { editMemberAccount, listMemberAccount } from '@/api/member/account'
+import EditAccountForm                              from '@/views/member/EditAccountForm.vue'
+import { editMerchantAccount, listMerchantAccount } from '@/api/merchant/account'
 
 export default {
     name      : 'Curd',
@@ -154,7 +154,7 @@ export default {
             return prop
         },
         statusChange(row) {
-            editMemberAccount({
+            editMerchantAccount({
                                   id                 : row[this.primaryKey],
                                   [row.switch_target]: row.new_switch,
                               }).then(() => {
@@ -168,7 +168,7 @@ export default {
                 ...this.pageInfo,
                 ...this.formatQueryParams(this.queryParams),
             }
-            listMemberAccount(qyparams).then(response => {
+            listMerchantAccount(qyparams).then(response => {
                 this.tableData = response.data.list
                 this.total     = response.data.count
             }).finally(() => {
