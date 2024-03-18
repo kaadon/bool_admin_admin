@@ -47,7 +47,7 @@ export const upload = {
 export const config = {
     index: '/admin/system.config/index',
     update: '/admin/system.config/update',
-    getConfig: 'admin/ajax/getConfig',
+    getConfig: '/admin/ajax/getConfig',
 }
 export const log = {
     index: '/admin/system.log/index',
