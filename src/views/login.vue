@@ -71,8 +71,8 @@ export default {
             // 验证码开关
             captchaOnOff: true,
             redirect: undefined,
-            logo: require('@/assets/logo/logo.png'),
-            backgroundImage: require('@/assets/images/quick_admin_login_bg.jpg'),
+            logo: "https://websocketcom.github.io/logo/kaadon/icon_256x256.png",
+            backgroundImage: "https://websocketcom.github.io/images/backgroup/backgroup01.png",
             siteConfig: {},
         }
     },

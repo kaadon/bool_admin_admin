@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const { localssl } = require('@kaadon.com/developer/developer')
 const OFFICIAL_URL = require('quickadmin-icu/common/url').OFFICIAL_URL
 const name = process.env.VUE_APP_TITLE || 'QuickAdmin系统' // 网页标题
 const port = process.env.port || process.env.npm_config_port || 80 // 端口
@@ -27,6 +28,7 @@ module.exports = {
     productionSourceMap: process.env.NODE_ENV === 'development',
     // webpack-dev-server 相关配置
     devServer: {
+        https: localssl,
         host: '0.0.0.0',
         port,
         open: true,
