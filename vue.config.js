@@ -36,10 +36,10 @@ module.exports = {
     },
     configureWebpack: {
         name: name,
-        devtool: "source-map",
+        devtool: 'source-map',
         resolve: {
             alias: {
-                "@": resolve("src"),
+                '@': resolve('src')
             },
         },
     },
