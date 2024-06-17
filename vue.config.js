@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const { localssl } = require('@kaadon.com/developer/developer')
 const OFFICIAL_URL = require('quickadmin-icu/common/url').OFFICIAL_URL
 const name = process.env.VUE_APP_TITLE || 'QuickAdmin系统' // 网页标题
 const port = process.env.port || process.env.npm_config_port || 80 // 端口
@@ -13,7 +14,6 @@ function resolve (dir) {
 //官方vue.config.js 参考文档 https://cli.vuejs.org/zh/config/#css-loaderoptions
 // 这里只列一部分，具体配置参考文档
 module.exports = {
-    transpileDependencies:['agent-base','socks-proxy-agent'],
     // 部署生产环境和开发环境下的URL。
     // 默认情况下，Vue CLI 会假设你的应用是被部署在一个域名的根路径上
     // 例如 http://www.quickadmin.icu/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 http://www.quickadmin.icu/admin/，则设置 baseUrl 为 /admin/。
@@ -28,20 +28,18 @@ module.exports = {
     productionSourceMap: process.env.NODE_ENV === 'development',
     // webpack-dev-server 相关配置
     devServer: {
+        https: localssl,
         host: '0.0.0.0',
         port,
         open: true,
         proxy, // https://cli.vuejs.org/config/#devserver-proxy
     },
     configureWebpack: {
-        node: {
-            dns: "empty",
-        },
         name: name,
-        devtool: 'source-map',
+        devtool: "source-map",
         resolve: {
             alias: {
-                '@': resolve('src'),
+                "@": resolve("src"),
             },
         },
     },

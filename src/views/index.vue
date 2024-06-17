@@ -151,9 +151,9 @@
 </template>
 
 <script>
-import G2BarChart from '@/views/dashboard/G2BarChart'
-import G2LineChart from '@/views/dashboard/G2LineChart'
-import G2BreadChart from '@/views/dashboard/G2BreadChart'
+import G2BarChart from "@/views/dashboard/G2BarChart"
+import G2LineChart from "@/views/dashboard/G2LineChart"
+import G2BreadChart from "@/views/dashboard/G2BreadChart"
 import G2DountChart from '@/views/dashboard/G2DountChart'
 import { mapGetters } from 'vuex'
 const a = [
