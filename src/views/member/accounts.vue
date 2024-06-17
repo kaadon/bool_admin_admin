@@ -96,27 +96,75 @@
     </div>
 </template>
 <script>
-import { curdMixin }                            from '@/mixins/curdMixin'
-import EditAccountForm                          from '@/views/member/EditAccountForm.vue'
-import { editMemberAccount, listMemberAccount } from '@/api/member/account'
+import { curdMixin } from '@/mixins/curdMixin'
+import EditAccountForm from './EditAccountForm.vue'
+import { editMemberAccount, listMemberAccount } from "@/api/member/account"
 
 export default {
-    name      : 'Curd',
-    mixins    : [curdMixin],
+    name: 'Curd',
+    mixins: [curdMixin],
     components: { EditAccountForm },
     data() {
         return {
             // table结构
             columns: [
                 {
-                    visible  : true,
-                    label    : 'ID',
-                    prop     : 'id',
-                    sortable : 'custom',
-                    width    : 100,
-                    formatter: (prop, row) => {
-                        return this.testFormatter(prop) // 案列：当前组件内格式化方法
-                    },
+                    visible: true,
+                    label: 'ID',
+                    prop: 'id',
+                },
+                {
+                    label: '头像',
+                    visible: true,
+                    prop: 'profile.avatar',
+                    component: 'QuickAdminImage'
+                },
+                {
+                    visible: true,
+                    label: '层级',
+                    prop: 'floor',
+                },
+                {
+                    visible: true,
+                    label: '邀请码',
+                    prop: 'uuid',
+                },
+                {
+                    visible: true,
+                    label: '状态',
+                    prop: 'status',
+                    component: 'QuickAdminSwitch'
+                },
+                {
+                    visible: true,
+                    label: '会员等级',
+                    prop: 'level',
+                    formatter:(prop)=>{
+                        return prop === 0 ? '普通会员' : '高级会员'
+                    }
+                },
+                {
+                    visible: true,
+                    label: '实名认证',
+                    prop: 'authen',
+                },
+                {
+                    visible: true,
+                    label: '邀请人',
+                    prop: 'inviter',
+                    formatter:(prop)=>{
+                        return prop ? prop : '-'
+                    }
+                },
+                {
+                    visible: true,
+                    label: 'APIID',
+                    prop: 'api_id',
+                },
+                {
+                    visible: true,
+                    label: 'APIKEY',
+                    prop: 'api_key',
                 },
             ],
             // 搜索表单是否展开
@@ -125,10 +173,10 @@ export default {
             queryParams: {
                 id: {
                     value: undefined,
-                    op   : '=',
+                    op: '=',
                 },
             },
-            status     : [
+            status: [
                 {
                     label: '显示',
                     value: 1,
@@ -155,22 +203,22 @@ export default {
         },
         statusChange(row) {
             editMemberAccount({
-                                  id                 : row[this.primaryKey],
-                                  [row.switch_target]: row.new_switch,
-                              }).then(() => {
+                id: row[this.primaryKey],
+                [row.switch_target]: row.new_switch,
+            }).then(() => {
                 this.initIndex()
                 this.msgSuccess(text + '成功')
             })
         },
         initIndex() {
-            this.loading   = true
+            this.loading = true
             const qyparams = {
                 ...this.pageInfo,
                 ...this.formatQueryParams(this.queryParams),
             }
             listMemberAccount(qyparams).then(response => {
                 this.tableData = response.data.list
-                this.total     = response.data.count
+                this.total = response.data.count
             }).finally(() => {
                 this.loading = false
             })

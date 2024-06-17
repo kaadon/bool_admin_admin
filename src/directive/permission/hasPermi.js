@@ -19,12 +19,10 @@ export default {
         const hasPermissions = permissions.some(permission => {
             return value.includes(permission)
         })
-
         if (!hasPermissions) {
             el.remove()
             return false
         }
-
         return true
     }
 
