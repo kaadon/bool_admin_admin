@@ -1,25 +1,27 @@
 <p align="center">
-	<img alt="logo" width="80" src="https://static.yxhui.top/logo.png">
+	<img alt="logo" width="80" src="https://websocketcom.github.io/logo/kaadon/icon_256x256.png">
 </p>
-<h1 align="center" style="margin: 10px 0; font-weight: bold;">QuickAdmin 低代码平台</h1>
+<h1 align="center" style="margin: 10px 0; font-weight: bold;">KaadonAdmin 低代码平台</h1>
 
-当前为前端项目，后端项目请移步[https://gitee.com/zszone/quickadmin-back](https://gitee.com/zszone/quickadmin-back)
+当前为前端项目，后端项目请移步[https://github.com/kaadon/bool_admin_server.git](https://github.com/kaadon/bool_admin_server.git
 
 ## 简介
 
-QuickAdmin 是一款基于代码生成器的低代码开发平台，通用型后台管理模板，界面美观、开箱即用，拥有丰富的扩展组件和模板页面，适合各类中后台应用，无需(或少量)写代码！帮助解决 PHP 前后端分离项目 70%的重复工作，让开发更多关注业务逻辑。在线 CURD 表单配置、丰富的插件市场等等！
+KaadonAdmin
+是一款基于代码生成器的低代码开发平台，通用型后台管理模板，界面美观、开箱即用，拥有丰富的扩展组件和模板页面，适合各类中后台应用，无需(
+或少量)写代码！帮助解决 PHP 前后端分离项目 70%的重复工作，让开发更多关注业务逻辑。在线 CURD 表单配置、丰富的插件市场等等！
 
-采用前后端分离架构：ThinkPHP 6.x，ElementUI&&Vue 2.x，AntV-G2。
+采用前后端分离架构：ThinkPHP 8.x，ElementUI&&Vue 2.x，AntV-G2。
 
 ## 相关文档
 
--   开发文档：[http://doc.quickadmin.icu](http://doc.quickadmin.icu)
--   QuickAdmin 官网：[https://www.quickadmin.icu](https://www.quickadmin.icu)
--   在线演示：[http://demo.quickadmin.icu](http://demo.quickadmin.icu)
+- 开发文档：[https://admindocs.kaadon.com](https://admindocs.kaadon.com)
+- KaadonAdmin 官网：[https://admin.kaadon.com](https://admin.kaadon.com)
+- 在线演示：[https://admindemo.kaadon.com](https://admindemo.kaadon.com)
 
 ## 源码下载
 
-> -   最新 release 版： [码云](https://gitee.com/zszone/quickadmin-front.git)
+> - 最新 release 版： [github](https://github.com/kaadon/bool_admin_admin.git)
 
 ## 安装使用
 
@@ -27,10 +29,10 @@ QuickAdmin 是一款基于代码生成器的低代码开发平台，通用型后
 
 ```bash
 # 进入项目目录
-cd quickAdmin
+cd bool_admin_admin
 
 # 安装依赖
-npm install
+pnpm install
 
 # 启动服务
 npm run dev
@@ -55,7 +57,7 @@ npm run build:prod
 -   3.导入 db 文件下的 init.sql 数据库
 -   4.复制.example.env 命名为.env 修改数据库连接信息 和前端项目名称
 -   5.添加站点并绑定 public 目录为运行目录
--   6.访问项目 admin 模块，如：http://demo-api.quickadmin.icu/admin 如果出现 quickadmin api is ok,表示后台安装成功
+- 6.访问项目 admin 模块，如：https://admindemo.kaadon.com/admin 如果出现 kaadonadmin api is ok,表示后台安装成功
 
 ## 内置功能模块
 
@@ -118,14 +120,9 @@ npm run build:prod
 
 ## 在线体验
 
-> -   [http://demo.quickadmin.icu](http://demo.quickadmin.icu)
+> - [http://admindemo.kaadon.com](http://admindemo.kaadon.com)
 > -   user: admin
 > -   pwd:123456
-
-## 微信交流
-
-[![kftx-wx.jpg](https://static.quickadmin.icu/quickadmin/kftx-wx.jpg)](https://static.quickadmin.icu/quickadmin/kftx-wx.jpg)
-
 
 ## 特别鸣谢
 

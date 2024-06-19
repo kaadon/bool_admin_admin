@@ -11,9 +11,10 @@
                         v-if="item.prop.indexOf('.') === -1"
                         :is="item.component ? item.component : 'QuickAdminText'"
                         :value='item.formatter ? item.formatter(scope.row[item.prop], scope.row) : scope.row[item.prop]'
-                        @statusChange='statusChange($event, scope.row, item.prop)'
+                        @statusChange='statusChange($event, scope.row,item.prop)'
                     >
                     </component>
+
                     <component v-else :is="item.component ? item.component : 'QuickAdminText'"
                                :value='renderTableFormat(scope.row, item.prop)'></component>
                 </template>
@@ -25,22 +26,22 @@
 </template>
 <script>
 export default {
-    name : 'QAtable',
+    name: 'QAtable',
     props: {
-        source   : {
+        source: {
             required: true,
-            type    : Array,
+            type: Array,
         },
-        columns  : {
+        columns: {
             required: true,
-            type    : Array,
+            type: Array,
         },
         selection: {
-            type   : Boolean,
+            type: Boolean,
             default: false,
         },
-        loading  : {
-            type   : Boolean,
+        loading: {
+            type: Boolean,
             default: false,
         },
     },
@@ -52,24 +53,20 @@ export default {
             })
         },
     },
-    methods : {
+    methods: {
         handleSelectionChange(val) {
             this.$emit('selectionChange', val)
         },
 
         handleSortChange(val) {
             this.$emit('sortChange', {
-                sort : val.prop,
+                sort: val.prop,
                 order: val.order === 'ascending' ? 'asc' : 'desc',
             })
         },
 
-        statusChange(value, row, key) {
-            return this.$emit('statusChange', {
-                ...row,
-                new_switch   : value,
-                switch_target: key,
-            })
+        statusChange(value, row, key = null) {
+            this.$emit('statusChange', { ...row, new_switch: value,switch_target:key })
         },
     },
 }
