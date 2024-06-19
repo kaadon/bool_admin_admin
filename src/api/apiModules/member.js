@@ -1,9 +1,12 @@
-export const account = {
-    index : '/admin/member.accounts/index',
-    add   : '/admin/member.accounts/add',
-    find  : '/admin/member.accounts/find',
-    edit  : '/admin/member.accounts/edit',
-    status: '/admin/member.accounts/status',
-    delete: '/admin/member.accounts/delete',
-    export: '/admin/member.accounts/export',
+export const profile = {
+    index: '/admin/member.profiles/index',
+    add: '/admin/member.profiles/add',
+    find: '/admin/member.profiles/find',
+    edit: '/admin/member.profiles/edit',
+    status: '/admin/member.profiles/status',
+    delete: '/admin/member.profiles/delete',
+    export: '/admin/member.profiles/export',
+    getOptions: '/admin/member.profiles/getOptions',
+    getInviter: '/admin/member.profiles/getInviter',
 }
+

@@ -20,14 +20,11 @@ export default {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning',
-            })
-                .then(() => {
-                    this.$emit('statusChange', val)
-                })
-                .then(() => {
+            }).then(() => {
+                this.$emit('statusChange', val)
+            }).then((res) => {
                     this.msgSuccess(text + '成功')
-                })
-                .catch(() => {
+            }).catch(() => {
                     val = val === 0 ? 1 : 0
                 })
         },

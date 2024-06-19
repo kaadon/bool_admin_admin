@@ -1,5 +1,6 @@
 import qaTable from '@/components/QuickAdminTable'
 import Cookies from 'js-cookie'
+
 export const curdMixin = {
     components: { qaTable },
     data () {
@@ -74,7 +75,7 @@ export const curdMixin = {
 
         // 编辑回显
         async handleFind (id) {
-            let response = await this.request.get(this.api.edit, { params: { id } })
+            let response = await this.request.get(this.api.find, {params: {id}})
             this.findFormData = this.formatFindData(response.data)
             this.editOpen = true
         },
@@ -165,10 +166,11 @@ export const curdMixin = {
         },
 
         // 关闭弹窗监听
-        beforeClose () {
+        beforeClose(from = 'editForm') {
             this.editOpen = false
             this.disabled = false
-            this.$refs['editForm'].reset()
+            this.findFormData = {}
+            this.$refs[from].reset()
         },
 
         // 重置按钮操作

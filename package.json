@@ -38,6 +38,7 @@
     "dependencies": {
         "@antv/g2": "^4.1.35",
         "@kaadon.com/helper": "^0.0.14",
+        "@kaadon.com/validate": "^0.0.1",
         "accounting": "^0.4.1",
         "axios": "1.6.2",
         "core-js": "^3.23.1",

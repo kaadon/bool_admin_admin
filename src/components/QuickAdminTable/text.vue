@@ -1,7 +1,7 @@
 <template>
     <div>
-        <p v-if='value'>{{ value }}</p>
-        <p v-else>-</p>
+        <p v-if="!value && parseInt(value) !== 0">-</p>
+        <p v-else>{{ value }}</p>
     </div>
 </template>
 <script>

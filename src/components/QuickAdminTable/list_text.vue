@@ -1,22 +1,23 @@
 <template>
     <div style='text-align: left' class='text-ellipsis'>
-        <div v-for='(list,index) in list' :key='index'>
-            <div v-if='list.copy' >
-                {{list.name?list.name + ":":""}}{{list.value}}
-                <i class='el-icon-copy-document' style='padding-left: 10px;color: #11a983' @click='copy(list.value)' ></i>
+        <div v-for="(item,index) in list" :key="index">
+            <div v-if="item.copy">
+                {{ item.name ? item.name + ":" : "" }}{{ item.value }}
+                <i class="el-icon-copy-document" style="padding-left: 10px;color: #11a983" @click="copy(item.value)"
+                ></i>
             </div>
-            <div v-else-if='list.pop'>
-                <el-popover trigger="hover" placement="top" v-if="list.value">
+            <div v-else-if="item.pop">
+                <el-popover trigger="hover" placement="top" v-if="item.value">
                     <p>
-                        {{list.name?list.name + ":":""}}{{list.value}}
+                        {{ item.name ? item.name + ":" : "" }}{{ item.value }}
                     </p>
                     <div slot="reference" class="name-wrapper">
-                        {{list.name?list.name + ":":""}}{{list.value}}
+                        {{ item.name ? item.name + ":" : "" }}{{ item.value }}
                     </div>
                 </el-popover>
             </div>
             <div v-else>
-                {{list.name?list.name + ":":""}}{{list.value}}
+                {{ item.name ? item.name + ":" : "" }}{{ item.value }}
             </div>
         </div>
     </div>
@@ -31,8 +32,8 @@
 
 </style>
 <script>
-import { Clipboard } from 'v-clipboard'
-import { isArray } from '@/utils/validate'
+import {Clipboard} from 'v-clipboard'
+import {isArray} from '@/utils/validate'
 
 export default {
     name: 'QuickAdminListText',

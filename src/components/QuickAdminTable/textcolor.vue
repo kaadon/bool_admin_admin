@@ -2,7 +2,8 @@
     <div class="quick-admin">
         <!--  -->
         <el-tag class="my-tag" effect="dark" :type="value.type" size="small" :color="value.color ? value.color : ''" :hit="false">
-            {{ value.text }}
+            <p v-if="!value.text && parseInt(value.text) !== 0">-</p>
+            <p v-else>{{ value.text }}</p>
         </el-tag>
     </div>
 </template>
