@@ -22,8 +22,8 @@ export default {
                 type: 'warning',
             }).then(() => {
                 this.$emit('statusChange', val)
-            }).then((res) => {
-                    this.msgSuccess(text + '成功')
+            }).then(() => {
+                this.msgSuccess(text + '成功')
             }).catch(() => {
                     val = val === 0 ? 1 : 0
                 })

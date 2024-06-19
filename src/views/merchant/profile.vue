@@ -192,8 +192,11 @@ export default {
                 {
                     visible: true,
                     label: '状态',
-                    prop: 'account.status',
-                    component: 'QuickAdminSwitch'
+                    prop: 'status',
+                    component: 'QuickAdminSwitch',
+                    formatter(prop, row) {
+                        return 0
+                    }
                 }
             ],
             // 搜索表单是否展开
@@ -244,6 +247,9 @@ export default {
         open() {
             this.addOpen = true
         },
+        statusChange(row) {
+            alert(5555)
+        },
         submitForm(formObj) {
             const filter_data = this.filterPostData(formObj, ['create_time', 'update_time'])
             if (formObj[this.primaryKey] !== undefined) {
@@ -284,16 +290,6 @@ export default {
             this.addOpen = false
             this.disabled = false
             this.$refs['addForm'].reset()
-        },
-        statusChange(row) {
-            alert(row)
-            // editMerchantProfile({
-            //     id: row[this.primaryKey],
-            //     [row.switch_target]: row.new_switch,
-            // }).then(() => {
-            //     this.initIndex()
-            //     this.msgSuccess(text + '成功')
-            // })
         },
         initIndex() {
             this.loading = true

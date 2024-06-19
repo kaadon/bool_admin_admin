@@ -11,7 +11,7 @@
                         v-if="item.prop.indexOf('.') === -1"
                         :is="item.component ? item.component : 'QuickAdminText'"
                         :value='item.formatter ? item.formatter(scope.row[item.prop], scope.row) : scope.row[item.prop]'
-                        @statusChange="statusChange"
+                        @statusChange="statusChange($event, scope.row,item.prop)"
                     >
                     </component>
 
@@ -65,9 +65,9 @@ export default {
             })
         },
 
-        statusChange(value, row, key = null) {
+        statusChange(value, row, key = 'status') {
             alert(value)
-            // return this.$emit('statusChange', {...row, new_switch: value, switch_target: key})
+            this.$emit('statusChange', {...row, new_switch: value, switch_target: key})
         },
     },
 }
