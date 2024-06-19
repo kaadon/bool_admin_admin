@@ -192,10 +192,10 @@ export default {
                 {
                     visible: true,
                     label: '状态',
-                    prop: 'status',
+                    prop: 'account.status',
                     component: 'QuickAdminSwitch',
-                    formatter(prop, row) {
-                        return 0
+                    formatter(prop){
+                        return parseInt(prop)
                     }
                 }
             ],
@@ -222,7 +222,7 @@ export default {
     },
     computed: {
         api() {
-            return this.$api.member.profile
+            return this.$api.merchant.profile
         },
     },
     created() {
@@ -233,11 +233,10 @@ export default {
             switch (key) {
                 case 'account':
                     return this.cates.map(item => {
-                        if (item.label !== 'system') {
-                            return {
-                                name: item.label,
-                                value: row?.[item.label],
-                            }
+                        console.log(row)
+                        return {
+                            name: item.label,
+                            value: row?.[item.label],
                         }
                     })
                 default:
@@ -247,9 +246,7 @@ export default {
         open() {
             this.addOpen = true
         },
-        statusChange(row) {
-            alert(5555)
-        },
+
         submitForm(formObj) {
             const filter_data = this.filterPostData(formObj, ['create_time', 'update_time'])
             if (formObj[this.primaryKey] !== undefined) {

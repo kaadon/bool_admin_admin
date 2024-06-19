@@ -158,18 +158,22 @@ export default {
                 },
                 {
                     visible: true,
-                    label: '邮箱',
-                    prop: 'email',
-                },
-                {
-                    visible: true,
-                    label: '手机号',
+                    label: '账号',
                     prop: 'mobile',
+                    component: 'QuickAdminListText',
+                    width: '200px',
+                    formatter: (prop, row) => {
+                        return this.columnsFormatter('account', row)
+                    }
                 },
                 {
                     visible: true,
                     label: '等级',
                     prop: 'account.level',
+                    formatter:(prop)=> {
+                        let level = this.levels.filter(item => item.value === prop)
+                        return level[0].label
+                    }
                 },
                 {
                     visible: true,
@@ -181,17 +185,19 @@ export default {
                     visible: true,
                     label: '姓名',
                     prop: 'realname',
-                },
-                {
-                    visible: true,
-                    label: '昵称',
-                    prop: 'nickname',
-                },
-                {
-                    visible: true,
-                    label: '邀请人',
-                    prop: 'account.inviter',
-                    component: 'QuickAdminCopyText'
+                    component: 'QuickAdminListText',
+                    formatter(prop, row) {
+                        return [
+                            {
+                                name: '姓名',
+                                value: row.realname,
+                            },
+                            {
+                                name: '昵称',
+                                value: row.nickname,
+                            }
+                        ]
+                    }
                 },
                 {
                     visible: true,
@@ -222,6 +228,7 @@ export default {
         }
     },
     computed: {
+
         api() {
             return this.$api.member.profile
         },
@@ -230,6 +237,19 @@ export default {
         this.pagesInit()
     },
     methods: {
+        columnsFormatter(key, row) {
+            switch (key) {
+                case 'account':
+                    return this.cates.map(item => {
+                        return {
+                            name: item.label,
+                            value: row?.[item.label],
+                        }
+                    })
+                default:
+                    return row[key]
+            }
+        },
         open() {
             this.addOpen = true
         },

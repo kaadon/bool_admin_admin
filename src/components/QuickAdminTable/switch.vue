@@ -1,5 +1,6 @@
 <template>
     <div>
+        {{value}}
         <el-switch :value="value" :active-value="1" :inactive-value="0" @change="statusChange"></el-switch>
     </div>
 </template>

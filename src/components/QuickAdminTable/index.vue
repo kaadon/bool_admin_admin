@@ -8,15 +8,11 @@
                              :sortable='item.sortable' :width='item.width' align='center'>
                 <template slot-scope='scope'>
                     <component
-                        v-if="item.prop.indexOf('.') === -1"
                         :is="item.component ? item.component : 'QuickAdminText'"
-                        :value='item.formatter ? item.formatter(scope.row[item.prop], scope.row) : scope.row[item.prop]'
+                        :value='item.formatter ? item.formatter(renderTableFormat(scope.row, item.prop), scope.row) : renderTableFormat(scope.row, item.prop)'
                         @statusChange="statusChange($event, scope.row,item.prop)"
                     >
                     </component>
-
-                    <component v-else :is="item.component ? item.component : 'QuickAdminText'"
-                               :value='renderTableFormat(scope.row, item.prop)'></component>
                 </template>
             </el-table-column>
             <!-- 如果有table操作，可从父组件插槽进来 -->
@@ -25,6 +21,8 @@
     </div>
 </template>
 <script>
+import { renderTableFormat } from '@/utils/quickadmin'
+
 export default {
     name: 'QAtable',
     props: {
@@ -54,6 +52,7 @@ export default {
         },
     },
     methods: {
+        renderTableFormat,
         handleSelectionChange(val) {
             this.$emit('selectionChange', val)
         },
@@ -66,7 +65,6 @@ export default {
         },
 
         statusChange(value, row, key = 'status') {
-            alert(value)
             this.$emit('statusChange', {...row, new_switch: value, switch_target: key})
         },
     },

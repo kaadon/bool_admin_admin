@@ -313,8 +313,12 @@ export function numberFormat (data, point_num, thousand_symbol) {
  * @returns
  */
 export function renderTableFormat (data, prop) {
-    return prop.split('.').reduce((acc, cur) => {
-        acc = acc && acc[cur];
-        return acc;
-    }, data)
+    if (prop.indexOf('.') !== -1){
+        return prop.split('.').reduce((acc, cur) => {
+            acc = acc && acc[cur];
+            return acc;
+        }, data)
+    }else {
+        return data[prop]
+    }
 }

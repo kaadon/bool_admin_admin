@@ -187,9 +187,13 @@ export const curdMixin = {
 
         //
         statusChange (row) {
-            this.request.post(this.api.status, { id: row[this.primaryKey], [row.switch_target]: row.new_switch }).then(() => {
-                this.initIndex()
-            })
+            if (row.switch_target.indexOf('.') === -1 && row.switch_target === 'status'){
+                this.request.post(this.api.status, { id: row[this.primaryKey], [row.switch_target]: row.new_switch }).then(() => {
+                    this.initIndex()
+                })
+            }else {
+                this.submitForm({ id: row[this.primaryKey], [row.switch_target]: row.new_switch })
+            }
         },
 
     }
