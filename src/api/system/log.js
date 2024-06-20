@@ -2,11 +2,11 @@ import request from '@/utils/request'
 import Vue from 'vue'
 
 // 查询操作日志列表
-export function list (params) {
+export function list(data) {
     return request({
         url: Vue.prototype.$api.log.index,
         method: 'post',
-        params
+        data
     })
 }
 
@@ -27,10 +27,10 @@ export function cleanOperlog () {
 }
 
 // 导出操作日志
-export function exportOperlog (query) {
+export function exportOperlog(data) {
     return request({
         url: '',
         method: 'post',
-        params: query
+        data
     })
 }

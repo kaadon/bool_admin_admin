@@ -2,11 +2,11 @@ import request from '@/utils/request'
 import Vue from 'vue'
 
 // 查询参数列表
-export function listConfig (params) {
+export function listConfig(data) {
     return request({
         url: Vue.prototype.$api.config.index,
         method: 'post',
-        params
+        data
     })
 }
 

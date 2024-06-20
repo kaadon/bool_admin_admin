@@ -6,21 +6,21 @@ import Vue from 'vue'
  * 1：目录 2：菜单 3：按钮权限 4：目录+菜单 不传取所有
  * @export
  * @returns
- * @param params
+ * @param data
  */
-export function listMenu (params) {
+export function listMenu(data) {
     return request({
         url: Vue.prototype.$api.menu.index,
         method: 'post',
-        params
+        data
     })
 }
 
-export function listAdminMenu (params) {
+export function listAdminMenu(data) {
     return request({
         url: Vue.prototype.$api.menu.adminIndex,
         method: 'post',
-        params
+        data
     })
 }
 // 查询菜单详细id string 菜单id
