@@ -30,6 +30,7 @@ import QuickAdminTextColor from '@/components/QuickAdminTable/textcolor'
 import QuickAdminHtmlPopover from '@/components/QuickAdminTable/htmlPopover'
 import QuickAdminCopyText from '@/components/QuickAdminTable/copyText.vue'
 import QuickAdminListText from '@/components/QuickAdminTable/list_text.vue'
+import QuickAdminJsonPopover from '@/components/QuickAdminTable/jsonPopover.vue'
 
 //自定义选择框分页组件
 import SelectPage from '@/components/QuickAdminCom/selectPage'
@@ -49,5 +50,6 @@ export {
     QuickAdminTextColor,
     QuickAdminHtmlPopover,
     QuickAdminListText,
+    QuickAdminJsonPopover,
     SelectPage,
 }

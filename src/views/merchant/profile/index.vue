@@ -120,7 +120,6 @@
             </template>
             <AddAccountForm ref="addForm"
                             :Cates="cates"
-                            :Levels="levels"
                             :disabled="disabled"
                             @submitForm="submitAddForm"
                             @editFormCancel="beforeAddFromClose"
@@ -130,9 +129,10 @@
 </template>
 <script>
 import {curdMixin} from '@/mixins/curdMixin'
-import {addMemberProfile, editMemberProfile, listMemberProfile, optionsMemberProfile} from "@/api/member/profile"
-import EditProfileForm from "@/views/member/EditProfileForm.vue";
-import AddAccountForm from "@/views/member/AddAccountForm.vue";
+import {addMerchantProfile, listMerchantProfile, optionsMerchantProfile} from "@/api/merchant/profile"
+import AddAccountForm from '@/views/merchant/profile/AddAccountForm.vue'
+import EditProfileForm from '@/views/merchant/profile/EditProfileForm.vue'
+
 
 export default {
     name: 'Curd',
@@ -142,44 +142,29 @@ export default {
         return {
             addOpen: false,
             cates: [],
-            levels: [],
             // table结构
             columns: [
                 {
                     visible: true,
                     label: 'ID',
-                    prop: 'mid',
+                    prop: 'uid',
+                    width: '80px',
                 },
                 {
                     label: '头像',
                     visible: true,
                     prop: 'avatar',
-                    component: 'QuickAdminImage'
+                    component: 'QuickAdminImage',
+                    width: '80px',
                 },
                 {
                     visible: true,
                     label: '账号',
                     prop: 'mobile',
                     component: 'QuickAdminListText',
-                    width: '200px',
                     formatter: (prop, row) => {
                         return this.columnsFormatter('account', row)
                     }
-                },
-                {
-                    visible: true,
-                    label: '等级',
-                    prop: 'account.level',
-                    formatter:(prop)=> {
-                        let level = this.levels.filter(item => item.value === prop)
-                        return level[0].label
-                    }
-                },
-                {
-                    visible: true,
-                    label: '邀请码',
-                    prop: 'account.uuid',
-                    component: 'QuickAdminCopyText'
                 },
                 {
                     visible: true,
@@ -201,9 +186,18 @@ export default {
                 },
                 {
                     visible: true,
+                    label: '邀请码',
+                    prop: 'account.uuid',
+                    component: 'QuickAdminCopyText'
+                },
+                {
+                    visible: true,
                     label: '状态',
                     prop: 'account.status',
-                    component: 'QuickAdminSwitch'
+                    component: 'QuickAdminSwitch',
+                    formatter(prop){
+                        return parseInt(prop)
+                    }
                 }
             ],
             // 搜索表单是否展开
@@ -228,9 +222,8 @@ export default {
         }
     },
     computed: {
-
         api() {
-            return this.$api.member.profile
+            return this.$api.merchant.profile
         },
     },
     created() {
@@ -241,6 +234,7 @@ export default {
             switch (key) {
                 case 'account':
                     return this.cates.map(item => {
+                        console.log(row)
                         return {
                             name: item.label,
                             value: row?.[item.label],
@@ -253,6 +247,7 @@ export default {
         open() {
             this.addOpen = true
         },
+
         submitForm(formObj) {
             const filter_data = this.filterPostData(formObj, ['create_time', 'update_time'])
             if (formObj[this.primaryKey] !== undefined) {
@@ -276,7 +271,7 @@ export default {
         },
         submitAddForm(formObj) {
             const filter_data = this.filterPostData(formObj, ['create_time', 'update_time'])
-            addMemberProfile({...filter_data})
+            addMerchantProfile({...filter_data})
                 .then(response => {
                     this.msgSuccess('新增成功')
                     this.initIndex()
@@ -284,9 +279,8 @@ export default {
                 })
         },
         async pagesInit() {
-            let memberOptions = await optionsMemberProfile()
+            let memberOptions = await optionsMerchantProfile()
             this.cates = (memberOptions?.data?.cates) ? memberOptions.data.cates.filter((item) => item.label !== 'system') : []
-            this.levels = memberOptions?.data?.levels || []
             this.initIndex()
         },
         // 关闭弹窗监听
@@ -295,26 +289,13 @@ export default {
             this.disabled = false
             this.$refs['addForm'].reset()
         },
-        // 案列：当前组件格式化方法
-        testFormatter(prop) {
-            return prop
-        },
-        statusChange(row) {
-            editMemberProfile({
-                id: row[this.primaryKey],
-                [row.switch_target]: row.new_switch,
-            }).then(() => {
-                this.initIndex()
-                this.msgSuccess(text + '成功')
-            })
-        },
         initIndex() {
             this.loading = true
             const qyparams = {
                 ...this.pageInfo,
                 ...this.formatQueryParams(this.queryParams),
             }
-            listMemberProfile(qyparams).then(response => {
+            listMerchantProfile(qyparams).then(response => {
                 this.tableData = response.data.list
                 this.total = response.data.count
             }).finally(() => {

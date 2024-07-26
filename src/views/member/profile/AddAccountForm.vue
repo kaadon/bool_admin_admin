@@ -54,6 +54,7 @@ export default {
     },
     data() {
         var validateInviter = (rule, value, callback) => {
+            if (!value) callback();
             inviterMemberProfile({inviter: value}).then((res) => {
                 res.data.length === 0 ? callback(new Error('邀请码不存在')) : callback()
             }).catch((err) => {
@@ -77,7 +78,7 @@ export default {
             // 编辑表单验证规则
             rules: {
                 inviter: [
-                    {required: true, message: '请输入邀请码', trigger: 'blur'},
+                    {required: false, message: '请输入邀请码', trigger: 'blur'},
                     {validator: validateInviter, trigger: 'blur'}
                 ],
                 cate: [{required: true, message: '请输入账号类型', trigger: 'blur'}],

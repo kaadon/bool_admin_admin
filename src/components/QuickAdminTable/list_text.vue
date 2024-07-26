@@ -2,22 +2,22 @@
     <div style='text-align: left' class='text-ellipsis'>
         <div v-for="(item,index) in list" :key="index">
             <div v-if="item.copy">
-                {{ item.name ? item.name + ":" : "" }}{{ item.value }}
+                {{ item.label ? item.label + ":" : "" }}{{ item.value }}
                 <i class="el-icon-copy-document" style="padding-left: 10px;color: #11a983" @click="copy(item.value)"
                 ></i>
             </div>
             <div v-else-if="item.pop">
                 <el-popover trigger="hover" placement="top" v-if="item.value">
                     <p>
-                        {{ item.name ? item.name + ":" : "" }}{{ item.value }}
+                        {{ item.label ? item.label + ":" : "" }}{{ item.value }}
                     </p>
                     <div slot="reference" class="name-wrapper">
-                        {{ item.name ? item.name + ":" : "" }}{{ item.value }}
+                        {{ item.label ? item.label + ":" : "" }}{{ item.value }}
                     </div>
                 </el-popover>
             </div>
             <div v-else>
-                {{ item.name ? item.name + ":" : "" }}{{ item.value }}
+                {{ item.label ? item.label + ":" : "" }}{{ item.value }}
             </div>
         </div>
     </div>
