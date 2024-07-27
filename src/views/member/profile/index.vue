@@ -82,7 +82,7 @@
                         @selectionChange="selectionChange"
                         id="quickadmin"
                     >
-                        <template v-slot:action>
+                        <template v-slot:action width="300">
                             <el-table-column label="操作">
                                 <template slot-scope="scope">
                                     <el-button
