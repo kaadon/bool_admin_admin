@@ -129,13 +129,13 @@
 </template>
 <script>
 import {curdMixin} from '@/mixins/curdMixin'
-import {addMerchantProfile, listMerchantProfile, optionsMerchantProfile} from "@/api/merchant/profile"
+import {addMerchantProfile} from "@/api/merchant/profile"
 import AddAccountForm from '@/views/merchant/profile/AddAccountForm.vue'
 import EditProfileForm from '@/views/merchant/profile/EditProfileForm.vue'
 
 
 export default {
-    name: 'Curd',
+    name: 'MerchantProfile',
     mixins: [curdMixin],
     components: {EditProfileForm, AddAccountForm},
     data() {
@@ -195,7 +195,7 @@ export default {
                     label: '状态',
                     prop: 'account.status',
                     component: 'QuickAdminSwitch',
-                    formatter(prop){
+                    formatter(prop) {
                         return parseInt(prop)
                     }
                 }
@@ -227,7 +227,7 @@ export default {
         },
     },
     created() {
-        this.pagesInit()
+        this.initIndex()
     },
     methods: {
         columnsFormatter(key, row) {
@@ -278,11 +278,7 @@ export default {
                     this.beforeAddFromClose()
                 })
         },
-        async pagesInit() {
-            let memberOptions = await optionsMerchantProfile()
-            this.cates = (memberOptions?.data?.cates) ? memberOptions.data.cates.filter((item) => item.label !== 'system') : []
-            this.initIndex()
-        },
+
         // 关闭弹窗监听
         beforeAddFromClose() {
             this.addOpen = false
@@ -295,10 +291,13 @@ export default {
                 ...this.pageInfo,
                 ...this.formatQueryParams(this.queryParams),
             }
-            listMerchantProfile(qyparams).then(response => {
-                this.tableData = response.data.list
-                this.total = response.data.count
-            }).finally(() => {
+            this.request.post(this.api.index, {params: qyparams})
+                .then(response => {
+                    this.tableData = response.data.list
+                    this.total = response.data.count
+                    this.status = response.data.status
+                    this.cates = response.data.cates
+                }).finally(() => {
                 this.loading = false
             })
         },

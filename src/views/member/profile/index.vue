@@ -174,7 +174,7 @@ import EditProfileForm from '@/views/member/profile/EditProfileForm.vue'
 import AddAccountForm from '@/views/member/profile/AddAccountForm.vue'
 
 export default {
-    name: 'Profile',
+    name: 'MemberProfile',
     mixins: [curdMixin],
     components: {EditProfileForm, AddAccountForm},
     data() {
