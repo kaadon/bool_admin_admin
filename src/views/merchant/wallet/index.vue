@@ -143,7 +143,7 @@ export default {
     },
     computed: {
         api() {
-            return this.$api.member.wallet
+            return this.$api.merchant.wallet
         },
     },
     created() {

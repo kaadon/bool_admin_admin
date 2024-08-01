@@ -203,7 +203,7 @@ export default {
     },
     computed: {
         api() {
-            return this.$api.member.record_logs
+            return this.$api.merchant.record_logs
         },
     },
     created() {
