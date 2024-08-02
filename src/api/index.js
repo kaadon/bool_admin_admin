@@ -41,20 +41,27 @@ export const online = {
     save: '/admin/onlinecurd.index/save',
     status: '/admin/onlinecurd.index/status',
 }
+
 export const upload = {
     upload: '/admin/ajax/upload',
 }
+
 export const config = {
     index: '/admin/system.config/index',
     update: '/admin/system.config/update',
     getConfig: '/admin/ajax/getConfig',
+    add: '/admin/system.config/add',
+    getConfigTypes: '/admin/system.config/getConfigTypes',
 }
+
 export const log = {
     index: '/admin/system.log/index',
 }
+
 export const route = {
     initIndex: '/admin/ajax/initIndex',
 }
+
 export const login = {
     index: '/admin/passport/index',
     register: '/admin/passport/register',

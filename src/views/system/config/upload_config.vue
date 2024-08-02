@@ -44,13 +44,17 @@
 </template>
 
 <script>
-import { updateConfig } from '@/api/system/config'
 import Config from '@/views/plugin/config'
+
 export default {
     props: {
         detail: {
             default: {},
             type: Object,
+        },
+        apiUrl: {
+            type: String,
+            default: '',
         },
     },
     components: { Config },
@@ -102,14 +106,22 @@ export default {
         },
     },
     methods: {
+        configChange(data) {
+            console.log()
+        },
         // 提交系统配置
         submit() {
             this.$refs['form'].validate(valid => {
                 if (valid) {
-                    updateConfig({ ...this.form }).then(response => {
-                        this.$emit("submitGetList")
-                        this.msgSuccess('修改成功')
-                    })
+                    if (valid) {
+                        //判断this.apiUrl是否为空
+                        if (this.apiUrl) {
+                            this.request.post(this.apiUrl, this.form).then(response => {
+                                this.$message.success('保存成功')
+                                this.$emit('submitGetList')
+                            })
+                        } else this.$message.success('请先设置apiUrl')
+                    }
                 }
             })
         },

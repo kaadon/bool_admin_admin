@@ -162,8 +162,18 @@ export default {
                     label: '账号',
                     prop: 'mobile',
                     component: 'QuickAdminListText',
-                    formatter: (prop, row) => {
-                        return this.columnsFormatter('account', row)
+                    formatter(prop, row) {
+                        return [
+                            {
+                                label: 'mobile',
+                                value: row?.mobile || '未填写',
+                            },
+                            {
+                                label: 'email',
+                                value: row?.email || '未填写',
+                                copy: row?.email || false,
+                            }
+                        ]
                     }
                 },
                 {
@@ -175,11 +185,11 @@ export default {
                         return [
                             {
                                 name: '姓名',
-                                value: row.realname,
+                                value: row?.realname || '未填写',
                             },
                             {
                                 name: '昵称',
-                                value: row.nickname,
+                                value: row?.nickname || '未填写',
                             }
                         ]
                     }

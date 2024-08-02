@@ -2,7 +2,7 @@
     <div style='text-align: left' class='text-ellipsis'>
         <div v-for="(item,index) in list" :key="index">
             <div v-if="item.copy">
-                {{ item.label ? item.label + ":" : "" }}{{ item.value }}
+                <b>{{ item.label ? item.label + ":" : "" }}</b>{{ item.value }}
                 <i class="el-icon-copy-document" style="padding-left: 10px;color: #11a983" @click="copy(item.value)"
                 ></i>
             </div>
