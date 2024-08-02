@@ -7,8 +7,8 @@
             >
                 <el-row>
                     <el-col :md="6" :sm="12">
-                        <el-form-item label="会员ID:" prop="mid.value">
-                            <el-input v-model="queryParams.mid.value" placeholder="请输入会员ID" clearable/>
+                        <el-form-item label="会员ID:" prop="uid.value">
+                            <el-input v-model="queryParams.uid.value" placeholder="请输入会员ID" clearable/>
                         </el-form-item>
                     </el-col>
                     <el-col :md="6" :sm="12">
@@ -91,7 +91,7 @@ export default {
                 {
                     visible: true,
                     label: '会员',
-                    prop: 'mid',
+                    prop: 'uid',
                     component: 'QuickAdminListText',
                     formatter: (prop, row) => {
                         let list = [{
@@ -134,7 +134,7 @@ export default {
                     value: undefined,
                     op: '=',
                 },
-                mid: {
+                uid: {
                     value: undefined,
                     op: '=',
                 },
@@ -147,7 +147,7 @@ export default {
         },
     },
     created() {
-        if (this.$route.query?.mid) this.queryParams.mid.value = this.$route.query.mid
+        if (this.$route.query?.uid) this.queryParams.uid.value = this.$route.query.uid
         this.initIndex()
     },
     methods: {
@@ -165,7 +165,7 @@ export default {
                 })
             }).then(({value}) => {
                 return _this.request.post(this.api.changeWallet, {
-                    mid: row.mid,
+                    uid: row.uid,
                     amount: amount,
                     remark: value
                 })

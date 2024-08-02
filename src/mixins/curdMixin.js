@@ -30,7 +30,8 @@ export const curdMixin = {
             isFullScreen: false,
             loading: false,
             exportLoading: false,
-            ids: []
+            ids: [],
+            activeTab: ''
         }
     },
 

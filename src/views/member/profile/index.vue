@@ -12,14 +12,14 @@
                         </el-form-item>
                     </el-col>
                     <el-col :md="6" :sm="12">
-                        <el-form-item label="实名状态:" prop="account.status.value">
+                        <el-form-item label="实名状态:">
                             <el-select v-model="queryParams['account.status'].value" filterable allow-create
                                        default-first-option placeholder="请选择"
                             >
                                 <el-option
-                                    v-for="extendItem in [{label:'全部',value:''},...(status.filter(item => item.value !== 2))]"
-                                    :key="extendItem.value" :label="extendItem.label"
-                                    :value="extendItem.value"
+                                    v-for="(extendItem,index) in [{label:'全部',value:''},...(status.filter(item => item.value !== 2))]"
+                                    :key="index" :label="extendItem.label"
+                                    :value="extendItem.value.toString()"
                                 ></el-option>
                             </el-select>
                         </el-form-item>
@@ -68,7 +68,7 @@
             </el-row>
             <!-- 列表 -->
             <el-tabs v-model="activeTab" @tab-click="handleAuthenAction" type="border-card">
-                <el-tab-pane v-for="(item, index) in [{label:'全部',value:''},...status]" :key="index"
+                <el-tab-pane v-for="(item, index) in [{label:'全部',value:''},...authen]" :key="index"
                              :label="item.label"
                              :name="item.value.toString()"
                 >
@@ -183,6 +183,7 @@ export default {
             cates: [],
             status: [],
             levels: [],
+            authen: [],
             // table结构
             columns: [
                 {
@@ -320,6 +321,24 @@ export default {
     created() {
         if (this.$route.query?.mid) this.queryParams.mid.value = this.$route.query.mid
         this.initIndex()
+    },
+    watch: {
+        status: {
+            handler(val) {
+                this.authen = val.map(item => {
+                    let authen = {
+                        '正常': '已实名',
+                        '禁用': '未实名',
+                        '待审核': '待审核',
+                    }
+                    return {
+                        label: authen[item.label],
+                        value: item.value,
+                    }
+                })
+            },
+            immediate: true
+        }
     },
     methods: {
         handleAuthenAction(tab) {
