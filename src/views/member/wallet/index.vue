@@ -12,7 +12,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :md="6" :sm="12">
-                        <el-form-item label="账号:" prop="profile.mobile.value">
+                        <el-form-item label="账号:">
                             <el-input v-model="queryParams['profile.mobile'].value" placeholder="请输入账号" clearable/>
                         </el-form-item>
                     </el-col>
@@ -107,24 +107,6 @@ export default {
                         return list
                     },
                 },
-                {
-                    visible: true,
-                    label: 'HPC',
-                    prop: 'rmb',
-                    formatter: (prop) => {
-                        if (parseFloat(prop) === 0) return '0'
-                        return numberFormat(prop, 4, '.')
-                    }
-                },
-                {
-                    visible: true,
-                    label: '能量罐',
-                    prop: 'bucket',
-                    formatter: (prop) => {
-                        if (parseFloat(prop) === 0) return '0'
-                        return numberFormat(prop, 4, '.')
-                    }
-                },
             ],
             // 搜索表单是否展开
             searchExpand: false,
@@ -149,6 +131,26 @@ export default {
     created() {
         if (this.$route.query?.mid) this.queryParams.mid.value = this.$route.query.mid
         this.initIndex()
+    },
+    watch: {
+        coins: {
+            handler(val) {
+                let column = val.map((item) => {
+                    return {
+                        visible: true,
+                        label: item.label + (item.unit !== item.label ? `(${item.unit})` :"") ,
+                        prop: item.field,
+                        formatter: (prop) => {
+                            if (parseFloat(prop) === 0) return 0
+                            return numberFormat(prop, 4)
+                        },
+                    }
+                })
+                this.columns = this.columns.concat(column)
+            },
+            deep: true,
+            immediate: true
+        }
     },
     methods: {
         changeWallet(row) {

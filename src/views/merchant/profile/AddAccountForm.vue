@@ -59,10 +59,10 @@ export default {
 
         var validateUsername = (rule, value, callback) => {
             switch (this.form.cate) {
-                case 1:
+                case 2:
                     if (!isEmail(value)) callback('请输入正确的邮箱格式')
                     break;
-                case 2:
+                case 1:
                     if (!isNumber(value)) callback('请输入正确的手机号格式')
                     break;
             }

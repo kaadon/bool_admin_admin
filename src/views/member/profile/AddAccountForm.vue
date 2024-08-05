@@ -53,27 +53,26 @@ export default {
         }
     },
     data() {
-        var validateInviter = (rule, value, callback) => {
-            if (!value) callback();
-            inviterMemberProfile({inviter: value}).then((res) => {
+        const validateInviter = (rule, value, callback) => {
+            if (!value) callback()
+            inviterMemberProfile({ inviter: value }).then((res) => {
                 res.data.length === 0 ? callback(new Error('邀请码不存在')) : callback()
             }).catch((err) => {
                 callback(new Error('邀请码不存在'))
             })
-        };
+        }
 
-
-        var validateUsername = (rule, value, callback) => {
-            switch (this.form.cate) {
-                case 1:
-                    if (!isEmail(value)) callback('请输入正确的邮箱格式')
-                    break;
+        const validateUsername = (rule, value, callback) => {
+            switch (parseInt(this.form.cate)) {
                 case 2:
+                    if (!isEmail(value)) callback('请输入正确的邮箱格式')
+                    break
+                case 1:
                     if (!isNumber(value)) callback('请输入正确的手机号格式')
-                    break;
+                    break
             }
             callback()
-        };
+        }
         return {
             // 编辑表单验证规则
             rules: {
