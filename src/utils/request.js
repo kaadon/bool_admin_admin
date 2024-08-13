@@ -44,23 +44,20 @@ service.interceptors.response.use(
         }
 
         //文件流行为filename获取 响应头content-disposition: inline;filename="export_demo_1641458100.xlsx"
-        if (res.headers.hasOwnProperty('content-disposition')) {
-            Cookies.set('filename', res.headers['content-disposition'].slice(17, -1))
+        if (res.headers.hasOwnProperty('content-disposition')) return {
+            filename : res.headers['content-disposition'].slice(17, -1),
+            data: res.data
         }
-
         // 未设置状态码则默认成功状态
-        let code = res.data.code || 1
-        if (res.data.code === 0) code = 0
-
+       let code = res.data.code === 0 ? 201 : (res.data.code || 200);
         // 获取错误信息
-        const msg = errorCode[code] || res.data.message
+        const msg = errorCode[code] || res.data?.message || "错误"
         if (code === 4001) {
             MessageBox.confirm('登录状态已过期,请重新登录', '系统提示', {
                 confirmButtonText: '重新登录',
                 cancelButtonText: '取消',
                 type: 'warning',
-            })
-                .then(() => {
+            }).then(() => {
                     store.dispatch('LogOut').then(() => {
                         location.href = process.env.VUE_APP_BASE_URL + '/#/index'
                     })

@@ -43,6 +43,7 @@ export function resetForm (refName) {
 
 // 文件流下载方法
 export function download (response, filename) {
+    console.log(response)
     let blob = new Blob([response]);
     let downloadElement = document.createElement("a");
     let href = window.URL.createObjectURL(blob); //创建下载的链接
