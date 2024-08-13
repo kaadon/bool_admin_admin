@@ -52,8 +52,8 @@ export default {
         value:{
             handler(val){
                 if(isArray(val))this.list = val.map(item=>{
-                    if (!item?.copy)item.copy = false
-                    if (!item?.pop)item.pop = false
+                    item.copy = !!item.copy
+                    item.pop = !!item.pop
                     return item
                 })
             },

@@ -40,7 +40,6 @@
                 ></right-toolbar>
             </el-row>
             <!-- 列表 -->
-
             <qa-table
                 :source="tableData"
                 :columns="columns"
@@ -90,22 +89,30 @@ export default {
                 },
                 {
                     visible: true,
-                    label: '会员',
+                    label: '账号',
                     prop: 'uid',
+                    width: 300,
                     component: 'QuickAdminListText',
-                    formatter: (prop, row) => {
-                        let list = [{
-                            name: '会员ID',
-                            value: prop,
-                            copy: true
-                        }]
-                        if (row?.profile) list.push({
-                            name: '',
-                            value: row.profile?.mobile || row.profile?.email,
-                            copy: true,
-                        })
-                        return list
-                    },
+                    formatter(prop, row) {
+                        let profile = row?.profile || {}
+                        return [
+                            {
+                                label: '代理ID',
+                                value: prop,
+                                copy: prop
+                            },
+                            {
+                                label: 'mobile',
+                                value: profile?.mobile || '未填写',
+                                copy: profile?.mobile
+                            },
+                            {
+                                label: 'email',
+                                value: profile?.email || '未填写',
+                                copy: profile?.email,
+                            }
+                        ]
+                    }
                 },
             ],
             // 搜索表单是否展开
@@ -138,7 +145,7 @@ export default {
                         prop: item.field,
                         formatter: (prop) => {
                             if (parseFloat(prop) === 0) return 0
-                            return numberFormat(prop, 4)
+                            return numberFormat(prop, 4, ',')
                         },
                     }
                 })

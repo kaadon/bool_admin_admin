@@ -200,8 +200,28 @@ export default {
                 {
                     visible: true,
                     label: '账号',
-                    prop: 'mobile',
-                    width: '200px',
+                    prop: 'mid',
+                    width: 300,
+                    component: 'QuickAdminListText',
+                    formatter(prop, row) {
+                        return [
+                            {
+                                label: '会员ID',
+                                value: row?.mid || '-',
+                                copy: row?.mid
+                            },
+                            {
+                                label: 'mobile',
+                                value: row?.mobile || '未填写',
+                                copy: row?.mobile
+                            },
+                            {
+                                label: 'email',
+                                value: row?.email || '未填写',
+                                copy: row?.email,
+                            }
+                        ]
+                    }
                 },
                 {
                     visible: true,
@@ -287,11 +307,6 @@ export default {
                     label: '状态',
                     prop: 'account.status',
                     component: 'QuickAdminSwitch',
-                },
-                {
-                    visible: true,
-                    label: '诚信值',
-                    prop: 'account.sincerity',
                 },
             ],
             // 搜索表单是否展开

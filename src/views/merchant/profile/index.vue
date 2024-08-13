@@ -160,18 +160,25 @@ export default {
                 {
                     visible: true,
                     label: '账号',
-                    prop: 'mobile',
+                    prop: 'mid',
+                    width: 300,
                     component: 'QuickAdminListText',
                     formatter(prop, row) {
                         return [
                             {
+                                label: '会员ID',
+                                value: row?.uid || '-',
+                                copy: row?.uid
+                            },
+                            {
                                 label: 'mobile',
                                 value: row?.mobile || '未填写',
+                                copy: row?.mobile
                             },
                             {
                                 label: 'email',
                                 value: row?.email || '未填写',
-                                copy: row?.email || false,
+                                copy: row?.email,
                             }
                         ]
                     }

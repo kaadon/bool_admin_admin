@@ -96,26 +96,23 @@ export const curdMixin = {
 
         // 导出
         handleExport () {
-
             // 只导出已勾选的项
             const _columns = this.columns.filter(item => item.visible)
             const fields = _columns.map((item) => {
                 return { field: item.prop, comment: item.label }
             })
-
             const qyparams = {
                 ...this.pageInfo,
                 ...this.formatQueryParams(this.queryParams),
                 fields: JSON.stringify(fields)
             }
-
             this.$confirm('是否确认导出所有数据项?', "警告", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning"
             }).then(() => {
                 this.exportLoading = true;
-                return this.request.get(this.api.export, { params: qyparams, responseType: "blob" })
+                return this.request.post(this.api.export, qyparams)
             }).then(response => {
                 this.download(response, Cookies.get('filename') || 'file.xlsx')
             }).catch(err => { }).finally(() => { this.exportLoading = false })

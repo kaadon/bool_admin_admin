@@ -90,21 +90,29 @@ export default {
                 },
                 {
                     visible: true,
-                    label: '会员',
+                    label: '账号',
                     prop: 'mid',
+                    width: 300,
                     component: 'QuickAdminListText',
                     formatter: (prop, row) => {
-                        let list = [{
-                            name: '会员ID',
-                            value: prop,
-                            copy: true
-                        }]
-                        if (row?.profile) list.push({
-                            name: '',
-                            value: row.profile?.mobile || row.profile?.email,
-                            copy: true,
-                        })
-                        return list
+                        let profile = row?.profile || {}
+                        return [
+                            {
+                                label: 'ID',
+                                value: prop,
+                                copy: prop
+                            },
+                            {
+                                label: 'mobile',
+                                value: profile?.mobile || '未填写',
+                                copy: profile?.mobile
+                            },
+                            {
+                                label: 'email',
+                                value: row?.profile?.email || '未填写',
+                                copy: profile?.email,
+                            }
+                        ]
                     },
                 },
             ],
@@ -138,11 +146,11 @@ export default {
                 let column = val.map((item) => {
                     return {
                         visible: true,
-                        label: item.label + (item.unit !== item.label ? `(${item.unit})` :"") ,
+                        label: item.label + (item.unit !== item.label ? `(${item.unit})` : ""),
                         prop: item.field,
                         formatter: (prop) => {
                             if (parseFloat(prop) === 0) return 0
-                            return numberFormat(prop, 4)
+                            return numberFormat(prop, 4, ',')
                         },
                     }
                 })
@@ -185,9 +193,11 @@ export default {
                 ...this.pageInfo,
                 ...this.formatQueryParams(this.queryParams),
             }
-            this.request.get(this.api.index, {params: qyparams}).then(response => {
+            this.request.post(this.api.index, {params: qyparams}).then(response => {
+                this.coins = response.data.coins
                 this.tableData = response.data.list
                 this.total = response.data.count
+                console.log(this.coins)
             }).finally(() => {
                 this.loading = false
             })

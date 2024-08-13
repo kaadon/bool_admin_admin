@@ -104,22 +104,30 @@ export default {
                 },
                 {
                     visible: true,
-                    label: '会员',
+                    label: '账号',
                     prop: 'uid',
+                    width: 300,
                     component: 'QuickAdminListText',
-                    formatter: (prop, row) => {
-                        let list = [{
-                            name: '会员ID',
-                            value: prop,
-                            copy: true
-                        }]
-                        if (row?.profile) list.push({
-                            name: '',
-                            value: row.profile?.mobile || row.profile?.email,
-                            copy: true,
-                        })
-                        return list
-                    },
+                    formatter(prop, row) {
+                        let profile = row?.profile || {}
+                        return [
+                            {
+                                label: '代理ID',
+                                value: prop,
+                                copy: prop
+                            },
+                            {
+                                label: 'mobile',
+                                value: profile?.mobile || '未填写',
+                                copy: profile?.mobile
+                            },
+                            {
+                                label: 'email',
+                                value: row?.profile?.email || '未填写',
+                                copy: profile?.email,
+                            }
+                        ]
+                    }
                 },
                 {
                     visible: true,
