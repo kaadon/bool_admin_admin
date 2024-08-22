@@ -1,9 +1,9 @@
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import {getToken} from '@/utils/auth'
 import Cookies from 'js-cookie'
 import errorCode from '@/utils/errorCode'
 import axios from 'axios'
-import { Message, MessageBox, Notification } from 'element-ui'
+import {Message, MessageBox, Notification} from 'element-ui'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 
@@ -30,8 +30,7 @@ service.interceptors.request.use(
         return config
     },
     error => {
-        console.log(error)
-        Promise.reject(error)
+        return Promise.reject(error)
     }
 )
 
@@ -45,11 +44,11 @@ service.interceptors.response.use(
 
         //文件流行为filename获取 响应头content-disposition: inline;filename="export_demo_1641458100.xlsx"
         if (res.headers.hasOwnProperty('content-disposition')) return {
-            filename : res.headers['content-disposition'].slice(17, -1),
+            filename: res.headers['content-disposition'].slice(17, -1),
             data: res.data
         }
         // 未设置状态码则默认成功状态
-       let code = res.data.code === 0 ? 201 : (res.data.code || 200);
+        let code = res.data.code === 0 ? 201 : (res.data.code || 200);
         // 获取错误信息
         const msg = errorCode[code] || res.data?.message || "错误"
         if (code === 4001) {
@@ -58,11 +57,12 @@ service.interceptors.response.use(
                 cancelButtonText: '取消',
                 type: 'warning',
             }).then(() => {
-                    store.dispatch('LogOut').then(() => {
-                        location.href = process.env.VUE_APP_BASE_URL + '/#/index'
-                    })
+                store.dispatch('LogOut').then(() => {
+                    location.href = process.env.VUE_APP_BASE_URL + '/#/index'
                 })
-                .catch(() => { })
+            })
+                .catch(() => {
+                })
             return Promise.reject('令牌验证失败')
         }
         if (code === 4002) {
@@ -71,34 +71,35 @@ service.interceptors.response.use(
                 cancelButtonText: '取消',
                 type: 'warning',
             })
-                .then(() => { })
-                .catch(() => { })
+                .then(() => {
+                })
+                .catch(() => {
+                })
             return Promise.reject('非法访问')
         }
         if (code === 4005) return Promise.reject(4005)
         if (code === 6001) {
             return Promise.reject(6001)
         } else if (code === 500) {
-            Message({ message: msg, type: 'error' })
+            Message({message: msg, type: 'error'})
             return Promise.reject(new Error(msg))
         } else if (code !== 200) {
-            Notification.error({ title: msg })
+            Notification.error({title: msg})
             return Promise.reject(new Error(msg))
         } else {
             return res.data
         }
     },
     error => {
-        console.log(error, ':[Log error] utils request')
-        let { message } = error
-        if (message == 'Network Error') {
+        let {message} = error
+        if (message === 'Network Error') {
             message = '系统错误'
         } else if (message.includes('timeout')) {
             message = '系统错误请求超时'
         } else if (message.includes('Request failed with status code')) {
             message = '系统错误' + message.substr(message.length - 3) + '异常'
         }
-        Message({ message: message, type: 'error', duration: 5 * 1000 })
+        Message({message: message, type: 'error', duration: 5 * 1000})
         return Promise.reject(error)
     }
 )

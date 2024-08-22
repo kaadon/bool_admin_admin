@@ -10,7 +10,7 @@
 // | Description: 全局函数
 // +----------------------------------------------------------------------
 
-import { formatMoney, formatNumber, toFixed } from 'accounting'
+import {formatMoney, formatNumber} from 'accounting'
 
 export function msgSuccess (msg) {
     this.$message({ showClose: true, message: msg, type: "success" });
@@ -42,9 +42,8 @@ export function resetForm (refName) {
 }
 
 // 文件流下载方法
-export function download (response, filename) {
-    console.log(response)
-    let blob = new Blob([response]);
+export function download(response, filename, fileType) {
+    let blob = new Blob([response], {type: fileType});
     let downloadElement = document.createElement("a");
     let href = window.URL.createObjectURL(blob); //创建下载的链接
     downloadElement.href = href;

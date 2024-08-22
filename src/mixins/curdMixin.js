@@ -1,5 +1,4 @@
 import qaTable from '@/components/QuickAdminTable'
-import Cookies from 'js-cookie'
 
 export const curdMixin = {
     components: { qaTable },
@@ -112,8 +111,8 @@ export const curdMixin = {
                     ...this.formatQueryParams(this.queryParams),
                     fields: JSON.stringify(fields)
                 })
-            }).then(({ data,filename }) => {
-                this.download(data, filename || 'file.xlsx')
+            }).then(({data, filename, filetype}) => {
+                this.download(data, filename || 'file.xlsx', filetype)
             }).catch(err => { })
                 .finally(() => { this.exportLoading = false })
         },
