@@ -267,40 +267,6 @@ export default {
                     visible: true,
                     label: '实名信息',
                     prop: 'verify',
-                    // component: 'QuickAdminJsonPopover',
-                    // formatter: (prop) => {
-                    //     if (!prop) return null
-                    //     return Object.keys(prop).map((propItem) => {
-                    //         let key = propItem
-                    //         let type = 'text'
-                    //         switch (propItem) {
-                    //             case 'back_image':
-                    //                 key = '反面图片'
-                    //                 type = 'image'
-                    //                 break
-                    //             case 'contact':
-                    //                 key = '紧急联系人'
-                    //                 break
-                    //             case 'front_image':
-                    //                 key = '正面图片'
-                    //                 type = 'image'
-                    //                 break
-                    //             case 'hand_image':
-                    //                 key = '手持图片'
-                    //                 type = 'image'
-                    //                 break
-                    //             case 'video':
-                    //                 key = '认证视频'
-                    //                 type = 'video'
-                    //                 break
-                    //         }
-                    //         return {
-                    //             label: key,
-                    //             value: prop[propItem],
-                    //             type: type,
-                    //         }
-                    //     })
-                    // },
                 },
                 {
                     visible: true,

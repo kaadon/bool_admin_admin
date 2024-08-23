@@ -28,6 +28,7 @@ export const admin = {
     edit: '/admin/system.admin/edit',
     delete: '/admin/system.admin/delete',
     status: '/admin/system.admin/status',
+    download: '/admin/ajax/download',
 }
 export const file = {
     index: '/admin/system.files/index',

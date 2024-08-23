@@ -8,3 +8,11 @@ export const getRouters = () => {
         method: 'post'
     })
 }
+
+export const downloadSystemFile = (params) => {
+    return request({
+        url: Vue.prototype.$api.admin.download,
+        method: 'get',
+        params
+    })
+}
