@@ -4,7 +4,9 @@
                     <el-tooltip :content="detail.remark" placement="top" v-if="detail.remark">
                         <i class="el-icon-question"></i>
                     </el-tooltip>
-                    {{ detail.title }}
+                    <span @click="copy(`get_config('${detail.group}','${detail.sign}')`)">
+                        {{ detail.title }}
+                    </span>
                 </span>
         <el-input v-if=" detail.type === 'textarea'" v-model="value" type="textarea" :rows="4"/>
         <ImageUpload v-else-if=" detail.type === 'image'" v-model="value" :fileType="['png']"/>
@@ -51,6 +53,7 @@
 </template>
 <script>
 import TimePickerRange from '@/components/timePicker/TimePickerRange.vue'
+import {Clipboard} from 'v-clipboard'
 
 export default {
     name: 'ConfigFrom',
@@ -102,6 +105,10 @@ export default {
         valueChange(str) {
             this.value = str
         },
+        copy(value) {
+            Clipboard.copy(value)
+            this.msgSuccess('复制成功')
+        }
     },
 }
 </script>
